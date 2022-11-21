@@ -27,4 +27,9 @@ public class GameTest {
         game.drawCard();
         assertEquals(51,game.deck.size());
     }
+    @Test
+    public void getCardSuit(){
+        game=new Game();
+        assertEquals("S",game.getCardSuit("7S"));
+    }
 }
