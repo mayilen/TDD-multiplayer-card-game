@@ -19,5 +19,8 @@ public class Game {
         Collections.shuffle(deck);
         return deck;
     }
+    public String drawCard(){
+        return deck.remove(deck.size()-1);
+    }
 
 }
