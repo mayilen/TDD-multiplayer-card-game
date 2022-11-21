@@ -6,6 +6,7 @@ public class Game {
     public Game(){
         deckInitializer();
     }
+
     public ArrayList<String> suit=new ArrayList<>(Arrays.asList("S","C","H","D"));
     public ArrayList<String> rank=new ArrayList<>(Arrays.asList("1","2","3","4","5","6","7","8","9","10","J","Q","K"));
     public ArrayList<String> deck = new ArrayList<>();
@@ -22,5 +23,7 @@ public class Game {
     public String drawCard(){
         return deck.remove(deck.size()-1);
     }
-
+    public String getCardSuit(String c){
+        return c.substring(1);
+    }
 }
