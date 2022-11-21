@@ -1,7 +1,7 @@
 package com.example.assignment3;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class GameTest {
     Game game;
@@ -42,5 +42,13 @@ public class GameTest {
         game=new Game();
         assertEquals(5,game.dealHand().size());
         assertEquals(47,game.deck.size());
+    }
+    @Test
+    public void canPlayTest(){
+        game=new Game();
+        game.topCard="7H";
+        assertTrue(game.canPlay("7D"));
+        assertTrue(game.canPlay("9H"));
+        assertFalse(game.canPlay("2C"));
     }
 }
