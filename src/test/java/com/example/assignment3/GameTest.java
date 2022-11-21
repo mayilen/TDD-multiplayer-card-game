@@ -32,4 +32,9 @@ public class GameTest {
         game=new Game();
         assertEquals("S",game.getCardSuit("7S"));
     }
+    @Test
+    public void getCardRank(){
+        game=new Game();
+        assertEquals("7",game.getCardRank("7S"));
+    }
 }
