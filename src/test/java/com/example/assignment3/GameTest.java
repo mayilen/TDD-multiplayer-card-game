@@ -37,4 +37,10 @@ public class GameTest {
         game=new Game();
         assertEquals("7",game.getCardRank("7S"));
     }
+    @Test
+    public void dealCards(){
+        game=new Game();
+        assertEquals(5,game.dealHand().size());
+        assertEquals(47,game.deck.size());
+    }
 }
