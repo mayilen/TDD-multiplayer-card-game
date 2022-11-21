@@ -1,6 +1,10 @@
 package com.example.assignment3;
 import org.junit.jupiter.api.Test;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.Arrays;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 public class GameTest {
@@ -50,5 +54,14 @@ public class GameTest {
         assertTrue(game.canPlay("7D"));
         assertTrue(game.canPlay("9H"));
         assertFalse(game.canPlay("2C"));
+    }
+    @Test
+    public void setHand(){
+        game=new Game();
+        game.setHand(new ArrayList<>(Arrays.asList("2H")));
+        assertEquals(1,game.hand.size());
+        game.setHand(new ArrayList<>(Arrays.asList("2H","2D")));
+        assertEquals(2,game.hand.size());
+      
     }
 }
