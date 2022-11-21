@@ -9,4 +9,8 @@ public class Game {
     public Game(){
     }
     public Set<String> suit=new HashSet<>(Arrays.asList("S","C","H","D"));
+    public Set<String> rank=new HashSet<>(Arrays.asList("1","2","3","4","5","6","7","8","9","10","J","Q","K"));
+    public ArrayList<String> deck = new ArrayList<>();
+
+
 }
