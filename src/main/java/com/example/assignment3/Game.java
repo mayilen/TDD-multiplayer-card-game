@@ -26,4 +26,7 @@ public class Game {
     public String getCardSuit(String c){
         return c.substring(1);
     }
+    public String getCardRank(String c){
+        return String.valueOf(c.charAt(0));
+    }
 }
