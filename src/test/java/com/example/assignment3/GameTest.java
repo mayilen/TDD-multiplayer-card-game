@@ -15,4 +15,9 @@ public class GameTest {
          game = new Game();
         assertEquals(13,game.rank.size());
     }
+    @Test
+    public void deckInitializer(){
+        game=new Game();
+        assertEquals(52,game.deckInitializer().size());
+    }
 }
