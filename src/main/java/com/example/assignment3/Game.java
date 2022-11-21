@@ -9,6 +9,7 @@ public class Game {
     public Game(){
         deckInitializer();
     }
+    public String topCard;
     public ArrayList<String> deckInitializer(){
         deck.clear();
         for(int i=0;i<rank.size();i++){
@@ -18,6 +19,13 @@ public class Game {
         }
         Collections.shuffle(deck);
         return deck;
+    }
+    public boolean canPlay(String c1){
+       String[] cards= c1.split(",");
+       if(cards.length==1){
+           return (Objects.equals(getCardSuit(cards[0]), getCardSuit(topCard)) ||(Objects.equals(getCardRank(cards[0]), getCardRank(topCard))));
+       }
+        return true;
     }
     public String drawCard(){
         return deck.remove(deck.size()-1);
