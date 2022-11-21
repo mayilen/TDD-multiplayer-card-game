@@ -20,4 +20,11 @@ public class GameTest {
         game=new Game();
         assertEquals(52,game.deckInitializer().size());
     }
+    @Test
+    public void drawCard(){
+        game=new Game();
+        assertEquals(52,game.deck.size());
+        game.drawCard();
+        assertEquals(51,game.deck.size());
+    }
 }
