@@ -9,4 +9,9 @@ public class GameTest {
         Game game = new Game();
         assertEquals(4,game.suit.size());
     }
+    @Test
+    public void getRank(){
+        Game game = new Game();
+        assertEquals(13,game.rank.size());
+    }
 }
