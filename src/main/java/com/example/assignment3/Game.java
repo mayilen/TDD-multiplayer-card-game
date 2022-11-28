@@ -55,7 +55,9 @@ public class Game {
        }
         return true;
     }
-
+    public boolean canDraw(){
+        return getDeckSize()>0;
+    }
     public String drawCard(){
         return deck.remove(deck.size()-1);
     }
