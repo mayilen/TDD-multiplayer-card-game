@@ -54,6 +54,8 @@ public class GameTest {
         assertTrue(game.canPlay("7D"));
         assertTrue(game.canPlay("9H"));
         assertFalse(game.canPlay("2C"));
+        assertTrue(game.canPlay("7D,3D"));
+        assertFalse(game.canPlay("7D,3H"));
     }
     @Test
     public void setHand(){
@@ -62,6 +64,6 @@ public class GameTest {
         assertEquals(1,game.hand.size());
         game.setHand(new ArrayList<>(Arrays.asList("2H","2D")));
         assertEquals(2,game.hand.size());
-      
+
     }
 }
