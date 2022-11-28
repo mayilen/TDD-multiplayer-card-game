@@ -79,6 +79,16 @@ public class GameTest {
         assertEquals(52,game.getDeckSize());
     }
     @Test
+    public void canDraw(){
+        game=new Game();
+        assertTrue(game.canDraw());
+        game.deck=new ArrayList<>();
+        game.deck.add("3H");
+        assertTrue(game.canDraw());
+        game.drawCard();
+        assertFalse(game.canDraw());
+    }
+    @Test
     public void canPlayTest(){
         game=new Game();
         game.topCard="7H";
