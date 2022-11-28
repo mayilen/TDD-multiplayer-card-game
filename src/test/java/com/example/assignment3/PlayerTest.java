@@ -20,7 +20,7 @@ public class PlayerTest {
         player = new Player(1);
         Game game=new Game();
          ArrayList<String> cards=new ArrayList<>();
-        String c=player.drawIntialHand(game);
-        assertEquals(c,player.cards.toString());
+        cards=player.drawIntialHand(game);
+        assertEquals(cards,player.cards);
     }
 }

@@ -26,8 +26,8 @@ public class GreetingController {
         if(players.size()>1){
             System.out.println("sfgsdfg");
             game=new Game();
-            sendSpecific(players.get(0).getPlayerID(), players.get(0).drawIntialHand(game));
-            sendSpecific(players.get(1).getPlayerID(), players.get(1).drawIntialHand(game));
+            sendSpecific(players.get(0).getPlayerID(), players.get(0).drawIntialHand(game).toString());
+            sendSpecific(players.get(1).getPlayerID(), players.get(1).drawIntialHand(game).toString());
         }
         return new Greeting(""+HtmlUtils.htmlEscape(""+m.getId()));
     }

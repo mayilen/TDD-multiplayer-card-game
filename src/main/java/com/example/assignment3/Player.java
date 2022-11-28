@@ -8,9 +8,8 @@ public class Player {
     public Player(int id){
         playerID=id;
     }
-public String drawIntialHand(Game g){
+public ArrayList<String> drawIntialHand(Game g){
         cards=g.dealHand();
-        return cards.toString();
 }
 public int getPlayerID(){
         return playerID;
