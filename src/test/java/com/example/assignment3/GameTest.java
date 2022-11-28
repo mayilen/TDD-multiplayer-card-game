@@ -74,6 +74,11 @@ public class GameTest {
         assertEquals("5D",game.topCard);
     }
     @Test
+    public void getDeckSize(){
+        game=new Game();
+        assertEquals(52,game.getDeckSize());
+    }
+    @Test
     public void canPlayTest(){
         game=new Game();
         game.topCard="7H";
