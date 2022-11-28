@@ -69,6 +69,9 @@ public class Game {
         topCard=c;
         return topCard;
     }
+    public int getDeckSize(){
+        return deck.size();
+    }
     public  ArrayList<String>  dealHand(){
         ArrayList<String> hand=new ArrayList<>();
         for(int i=0;i<5;i++){
