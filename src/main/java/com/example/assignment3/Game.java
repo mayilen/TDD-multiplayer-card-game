@@ -65,6 +65,10 @@ public class Game {
     public String getCardRank(String c){
         return String.valueOf(c.charAt(0));
     }
+    public String playCard(String c){
+        topCard=c;
+        return topCard;
+    }
     public  ArrayList<String>  dealHand(){
         ArrayList<String> hand=new ArrayList<>();
         for(int i=0;i<5;i++){
