@@ -10,6 +10,17 @@ public class Player {
     }
 public ArrayList<String> drawIntialHand(Game g){
         cards=g.dealHand();
+        return cards;
+}
+public ArrayList<String> drawCard(Game g){
+        if(g.topCard.charAt(0)=='2'){
+            cards.add(g.drawCard());
+            cards.add(g.drawCard());
+        }else{
+            cards.add(g.drawCard());
+        }
+        return cards;
+
 }
 public int getPlayerID(){
         return playerID;
