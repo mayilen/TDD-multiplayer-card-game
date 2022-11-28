@@ -21,6 +21,10 @@ public class Game {
         Collections.shuffle(deck);
         return deck;
     }
+    public boolean changeSuit(String suite){
+        topCard=topCard.charAt(0)+suite;
+        return true;
+    }
     public boolean canPlay(String c1){
        String[] cards= c1.split(",");
        if(cards.length==1){
