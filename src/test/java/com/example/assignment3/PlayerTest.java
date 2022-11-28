@@ -23,4 +23,20 @@ public class PlayerTest {
         cards=player.drawIntialHand(game);
         assertEquals(cards,player.cards);
     }
+    @Test
+    public void drawCard()
+    {
+        player = new Player(1);
+        Game game=new Game();
+
+        ArrayList<String> cards=new ArrayList<>();
+        cards=player.drawIntialHand(game);
+        game.topCard="5S";
+        player.drawCard(game);
+        assertEquals(6,cards.size());
+        game.topCard="2S";
+        assertEquals(cards,player.cards);
+        player.drawCard(game);
+        assertEquals(8,cards.size());
+    }
 }
