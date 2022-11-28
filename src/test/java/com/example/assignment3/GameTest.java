@@ -15,6 +15,15 @@ public class GameTest {
         assertEquals(4,game.suit.size());
     }
     @Test
+    public void changeSuit(){
+        game = new Game();
+        game.topCard="3S";
+        String topcard=game.topCard;
+        game.changeSuit("D");
+        assertNotEquals(topcard,game.topCard);
+        assertEquals("3D",game.topCard);
+    }
+    @Test
     public void getRank(){
          game = new Game();
         assertEquals(13,game.rank.size());
