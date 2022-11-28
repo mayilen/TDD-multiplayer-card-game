@@ -11,6 +11,7 @@ public class Game {
         deckInitializer();
     }
     public String topCard;
+
     public ArrayList<String> deckInitializer(){
         deck.clear();
         for(int i=0;i<rank.size();i++){
@@ -20,6 +21,15 @@ public class Game {
         }
         Collections.shuffle(deck);
         return deck;
+    }
+    public String intializeTopCard(){
+        String drawcard=drawCard();
+        while(drawcard.contains("2")||drawcard.contains("Q")||drawcard.contains("1")){
+            deck.add(0,drawcard);
+            drawcard=drawCard();
+        }
+        topCard=drawcard;
+        return topCard;
     }
     public boolean changeSuit(String suite){
         topCard=topCard.charAt(0)+suite;
@@ -41,6 +51,7 @@ public class Game {
        }
         return true;
     }
+
     public String drawCard(){
         return deck.remove(deck.size()-1);
     }
