@@ -11,7 +11,7 @@ public class Game {
         deckInitializer();
     }
     public String topCard;
-
+    public Boolean drewPlus2=false;
     public ArrayList<String> deckInitializer(){
         deck.clear();
         for(int i=0;i<rank.size();i++){
@@ -32,7 +32,7 @@ public class Game {
         return topCard;
     }
     public boolean changeSuit(String suite){
-        topCard=topCard.charAt(0)+suite;
+        topCard=getCardRank(topCard)+suite;
         return true;
     }
     public boolean canPlay(String c1){
@@ -47,21 +47,22 @@ public class Game {
                return false;
            }
 
-       if(cards.length==1){
-           return Objects.equals(getCardSuit(cards[0]), getCardSuit(topCard)) ||(Objects.equals(getCardRank(cards[0]), getCardRank(topCard)));
-       }
-       Boolean verify=true;
-       if(topCard.charAt(0)=='2'){
-       for(int i=0;i<cards.length;i++){
+           for(int i=0;i<cards.length;i++){
            if(i==0){
             verify=Objects.equals(getCardSuit(cards[0]), getCardSuit(topCard)) ||(Objects.equals(getCardRank(cards[0]), getCardRank(topCard)));
            }else {
                verify=Objects.equals(getCardSuit(cards[i-1]), getCardSuit(cards[i])) ||(Objects.equals(getCardRank(cards[i-1]), getCardRank(cards[i])));
            }
            if(!verify) return false;
-       }}else{
-           return false;
        }
+       }else{
+           if(cards.length==1) {
+               return Objects.equals(getCardSuit(cards[0]), getCardSuit(topCard)) || (Objects.equals(getCardRank(cards[0]), getCardRank(topCard)));
+           }else{
+               return false;
+           }
+
+           }
         return true;
     }
     public boolean canDraw(){
@@ -94,4 +95,5 @@ public class Game {
     public void setHand(ArrayList<String> hand) {
         this.hand = hand;
     }
+
 }
