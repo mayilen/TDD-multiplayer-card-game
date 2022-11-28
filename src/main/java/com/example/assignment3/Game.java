@@ -37,10 +37,12 @@ public class Game {
     }
     public boolean canPlay(String c1){
        String[] cards= c1.split(",");
+
        if(cards.length==1){
            return Objects.equals(getCardSuit(cards[0]), getCardSuit(topCard)) ||(Objects.equals(getCardRank(cards[0]), getCardRank(topCard)));
        }
        Boolean verify=true;
+       if(topCard.charAt(0)=='2'){
        for(int i=0;i<cards.length;i++){
            if(i==0){
             verify=Objects.equals(getCardSuit(cards[0]), getCardSuit(topCard)) ||(Objects.equals(getCardRank(cards[0]), getCardRank(topCard)));
@@ -48,6 +50,8 @@ public class Game {
                verify=Objects.equals(getCardSuit(cards[i-1]), getCardSuit(cards[i])) ||(Objects.equals(getCardRank(cards[i-1]), getCardRank(cards[i])));
            }
            if(!verify) return false;
+       }}else{
+           return false;
        }
         return true;
     }
