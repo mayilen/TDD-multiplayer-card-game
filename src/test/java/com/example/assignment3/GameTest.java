@@ -96,9 +96,14 @@ public class GameTest {
         assertTrue(game.canPlay("9H"));
         assertFalse(game.canPlay("2C"));
         game.topCard="2D";
+        assertTrue(game.canPlay("2S"));
+        assertFalse(game.canPlay("7D"));
+        assertFalse(game.canPlay("2D,7D"));
         assertTrue(game.canPlay("7D,3D"));
         game.topCard="7H";
         assertFalse(game.canPlay("7D,3H"));
+
+
     }
     @Test
     public void setHand(){
@@ -109,4 +114,5 @@ public class GameTest {
         assertEquals(2,game.hand.size());
 
     }
+
 }
