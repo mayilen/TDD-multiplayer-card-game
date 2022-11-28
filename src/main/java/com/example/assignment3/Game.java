@@ -37,6 +37,15 @@ public class Game {
     }
     public boolean canPlay(String c1){
        String[] cards= c1.split(",");
+       Boolean verify;
+       if(Objects.equals(getCardRank(topCard), "2")){
+           if(cards.length==1&&Objects.equals(getCardRank(cards[0]), "2")){
+               return true;
+           }else if(cards.length!=1&&Objects.equals(getCardRank(cards[0]), "2")){
+               return false;
+           } else if (cards.length==1&&!Objects.equals(getCardRank(cards[0]), "2")) {
+               return false;
+           }
 
        if(cards.length==1){
            return Objects.equals(getCardSuit(cards[0]), getCardSuit(topCard)) ||(Objects.equals(getCardRank(cards[0]), getCardRank(topCard)));
