@@ -75,6 +75,8 @@ public class GameTest {
         game.playCard("1D");
         assertEquals(-1,game.direction);
         assertEquals(3,game.nextTurn());
+        game.playCard("QD");
+        assertEquals(1,game.nextTurn());
     }
     @Test
     public void getDeckSize(){
@@ -105,7 +107,6 @@ public class GameTest {
         assertTrue(game.canPlay("7D,3D"));
         game.topCard="7H";
         assertFalse(game.canPlay("7D,3H"));
-
 
     }
    @Test
