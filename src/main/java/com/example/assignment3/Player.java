@@ -33,6 +33,18 @@ public ArrayList<String> drawCard(){
         return drew;
 
 }
+public boolean playCards(String c){
+
+        if(g.canPlay(c)){
+            String[] card= c.split(",");
+            for(int i=0;i<card.length;i++){
+                cards.remove(card[i]);
+                g.playCard(card[i]);
+            }
+            return true;
+        }
+        return false;
+}
 public int getPlayerID(){
         return playerID;
 }
