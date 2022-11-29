@@ -27,6 +27,9 @@ public class Player {
         score+=c;
         return c;
     }
+    public Boolean hasWon(){
+        return cards.size()==0;
+    }
 public ArrayList<String> drawIntialHand(Game g){
         cards=g.dealHand();
         return cards;
