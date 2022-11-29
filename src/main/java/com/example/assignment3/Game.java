@@ -11,7 +11,6 @@ public class Game {
         deckInitializer();
     }
     public String topCard;
-    public Boolean drewPlus2=false;
     public ArrayList<String> deckInitializer(){
         deck.clear();
         for(int i=0;i<rank.size();i++){

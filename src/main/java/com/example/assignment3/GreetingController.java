@@ -22,12 +22,12 @@ public class GreetingController {
     @SendTo("/topic/greetings")
     public Greeting greet(HelloMessage m) throws Exception {
         Thread.sleep(1000);
-        players.add(new Player(m.getId()));
+        players.add(new Player(m.getId(),game));
         if(players.size()>1){
             System.out.println("sfgsdfg");
             game=new Game();
-            sendSpecific(players.get(0).getPlayerID(), players.get(0).drawIntialHand(game).toString());
-            sendSpecific(players.get(1).getPlayerID(), players.get(1).drawIntialHand(game).toString());
+            sendSpecific(players.get(0).getPlayerID(), players.get(0).drawIntialHand().toString());
+            sendSpecific(players.get(1).getPlayerID(), players.get(1).drawIntialHand().toString());
         }
         return new Greeting(""+HtmlUtils.htmlEscape(""+m.getId()));
     }

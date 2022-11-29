@@ -11,34 +11,37 @@ public class PlayerTest {
 
     @Test
     public void getPlayerID(){
-         player = new Player(1);
+        Game game=new Game();
+         player = new Player(1,game);
         assertEquals(1,player.getPlayerID());
     }
     @Test
     public void dealHand()
     {
-        player = new Player(1);
         Game game=new Game();
+        player = new Player(1,game);
+
          ArrayList<String> cards=new ArrayList<>();
-        cards=player.drawIntialHand(game);
+        cards=player.drawIntialHand();
         assertEquals(cards,player.cards);
     }
     @Test
     public void drawCard()
     {
-        player = new Player(1);
         Game game=new Game();
+        player = new Player(1,game);
+
 
         ArrayList<String> cards=new ArrayList<>();
-        cards=player.drawIntialHand(game);
+        cards=player.drawIntialHand();
         game.topCard="5S";
-        assertEquals(1,player.drawCard(game).size());
+        assertEquals(1,player.drawCard().size());
 
         assertEquals(6,cards.size());
         game.topCard="2S";
         assertEquals(cards,player.cards);
-        assertEquals(2,player.drawCard(game).size());
-        
+        assertEquals(2,player.drawCard().size());
+
         assertEquals(8,cards.size());
     }
 }
