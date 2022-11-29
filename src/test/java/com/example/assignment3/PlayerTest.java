@@ -44,4 +44,22 @@ public class PlayerTest {
 
         assertEquals(8,cards.size());
     }
+    @Test
+    public void playCard()
+    {
+        Game game=new Game();
+        player = new Player(1,game);
+
+
+        ArrayList<String> cards=new ArrayList<>();
+        player.cards.add("4S");
+        player.cards.add("7H");
+
+        game.topCard="5S";
+        assertTrue(player.playCards("4S"));
+        assertFalse(player.playCards("7H"));
+        player.cards.add("5H");
+        game.topCard="2H";
+       assertTrue(player.playCards("7H,5H"));
+    }
 }
