@@ -37,9 +37,14 @@ public boolean playCards(String c){
 
         if(g.canPlay(c)){
             String[] card= c.split(",");
+
             for(int i=0;i<card.length;i++){
+                if(cards.contains(card[i])){
                 cards.remove(card[i]);
-                g.playCard(card[i]);
+                g.playCard(card[i]);}
+                else{
+                    return false;
+                }
             }
             return true;
         }
