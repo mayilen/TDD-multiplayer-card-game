@@ -32,11 +32,13 @@ public class PlayerTest {
         ArrayList<String> cards=new ArrayList<>();
         cards=player.drawIntialHand(game);
         game.topCard="5S";
-        player.drawCard(game);
+        assertEquals(1,player.drawCard(game).size());
+
         assertEquals(6,cards.size());
         game.topCard="2S";
         assertEquals(cards,player.cards);
-        player.drawCard(game);
+        assertEquals(2,player.drawCard(game).size());
+        
         assertEquals(8,cards.size());
     }
 }
