@@ -13,6 +13,7 @@ public class Game {
     public int direction=1;
     public int currentTurn=0;
     public String topCard;
+    public int maxPlayer;
     public ArrayList<String> deckInitializer(){
         deck.clear();
         for(int i=0;i<rank.size();i++){
@@ -114,4 +115,8 @@ public class Game {
 
         return hand;
     }
+    public void setMaxPlayer(int p){
+        maxPlayer=p;
+    }
 }
+
