@@ -13,21 +13,6 @@ function setConnected(connected) {
 }
 
 function connect() {
-//    var socket = new SockJS('/room');
-//    stompClient = Stomp.over(socket);
-//    stompClient.connect({}, function (frame) {
-//        setConnected(true);
-//        console.log('Connected: ' + frame);
-//        stompClient.subscribe('/topic/greetings', function (greeting) {
-//
-//            showGreeting(JSON.parse(greeting.body));
-//
-//        });
-// stompClient.subscribe('user/queue/specific-user'
-//              + '-user' + this.id, function (msgOut) {
-//
-//            })
-//    });
  id = Math.floor(Math.random()*10000);
 var socket = new SockJS('/room');
     stompClient = Stomp.over(socket);
@@ -39,12 +24,20 @@ var socket = new SockJS('/room');
            // console.log("JSON.parse(greeting.body): "+JSON.parse(greeting.body))
 
         });
+
  stompClient.subscribe('/user/queue/specific-user/'
               + id, function (msgOut) {
               console.log("msg: "+JSON.parse(msgOut.body))
         showHand(JSON.parse(msgOut.body));
             })
     });
+ setTimeout(function () {
+  console.log("after")
+
+     stompClient.send("/app/hello", {}, JSON.stringify({'id':id}));
+
+     }, 1000);
+
 }
 
 function disconnect() {
@@ -54,15 +47,18 @@ function disconnect() {
     setConnected(false);
     console.log("Disconnected");
 }
-
-function sendName() {
-    stompClient.send("/app/hello", {}, JSON.stringify({'id':id}));
-     $( "#send" ).prop("disabled",true);
-
-}
-
 function showGreeting(message) {
     $("#greetings").append("<tr><td>" + message.message + "</td></tr>");
+}
+function play(){
+
+    if($( "#suite").is(':visible')){
+    console.log( $( "#card").val());
+    console.log($( "#suite").val())
+    }else{
+     console.log( $( "#card").val());
+    }
+
 }
 function showHand(message) {
 console.log("hand is "+message);
@@ -73,6 +69,16 @@ $(function () {
         e.preventDefault();
     });
     $( "#connect" ).click(function() { connect(); });
+    $( "#card" ).on('input',function(){
+    if($( "#card" ).val().includes("8")){
+    console.log("dfgdf")
+        $( "#suiteLabel").prop("hidden",false)
+        $( "#suite").prop("hidden",false)
+    }else{
+     $( "#suiteLabel").prop("hidden",true)
+            $( "#suite").prop("hidden",true)
+    }
+    })
     $( "#disconnect" ).click(function() { disconnect(); });
-    $( "#send" ).click(function() { sendName(); });
+    $( "#send" ).click(function() { play(); });
 });
