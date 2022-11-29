@@ -97,6 +97,8 @@ public class Game {
         topCard=c;
         if(Objects.equals(getCardRank(topCard), "1")) {
             direction=direction*-1;
+        } else if (Objects.equals(getCardRank(topCard), "Q")) {
+            nextTurn();
         }
         return topCard;
     }
