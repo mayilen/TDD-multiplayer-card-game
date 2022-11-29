@@ -46,6 +46,7 @@ public boolean playCards(String c,Game g){
                     return false;
                 }
             }
+            g.nextTurn();     
             return true;
         }
         return false;
