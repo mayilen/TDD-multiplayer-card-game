@@ -44,10 +44,10 @@ public class Game {
         }else{
             currentTurn--;
         }
-        if(currentTurn>3){
+        if(currentTurn>maxPlayer){
             currentTurn=0;
         } else if (currentTurn<0) {
-            currentTurn=3;
+            currentTurn=maxPlayer;
         }
         return currentTurn;
     }
