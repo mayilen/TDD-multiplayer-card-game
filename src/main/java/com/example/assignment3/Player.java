@@ -4,17 +4,17 @@ import java.util.ArrayList;
 
 public class Player {
     public int playerID;
-    public Game g;
+
     public ArrayList<String> cards=new ArrayList<>();
-    public Player(int id,Game game){
+    public Player(int id){
         playerID=id;
-        g=game;
+
     }
-public ArrayList<String> drawIntialHand(){
+public ArrayList<String> drawIntialHand(Game g){
         cards=g.dealHand();
         return cards;
 }
-public ArrayList<String> drawCard(){
+public ArrayList<String> drawCard(Game g){
     ArrayList<String> drew=new ArrayList<>();
     String card;
         if(g.topCard.charAt(0)=='2'&&g.getDeckSize()>1){
@@ -33,7 +33,7 @@ public ArrayList<String> drawCard(){
         return drew;
 
 }
-public boolean playCards(String c){
+public boolean playCards(String c,Game g){
 
         if(g.canPlay(c)){
             String[] card= c.split(",");

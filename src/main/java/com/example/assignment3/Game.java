@@ -6,7 +6,7 @@ public class Game {
     public ArrayList<String> suit=new ArrayList<>(Arrays.asList("S","C","H","D"));
     public ArrayList<String> rank=new ArrayList<>(Arrays.asList("1","2","3","4","5","6","7","8","9","10","J","Q","K"));
     public ArrayList<String> deck = new ArrayList<>();
-    public ArrayList<String> hand=new ArrayList<>();
+
     public Game(){
         deckInitializer();
     }
@@ -84,15 +84,12 @@ public class Game {
         return deck.size();
     }
     public  ArrayList<String>  dealHand(){
+        System.out.println(deck.size());
         ArrayList<String> hand=new ArrayList<>();
         for(int i=0;i<5;i++){
             hand.add(drawCard());
         }
+
         return hand;
     }
-
-    public void setHand(ArrayList<String> hand) {
-        this.hand = hand;
-    }
-
 }
