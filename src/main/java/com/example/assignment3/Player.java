@@ -13,13 +13,22 @@ public ArrayList<String> drawIntialHand(Game g){
         return cards;
 }
 public ArrayList<String> drawCard(Game g){
-        if(g.topCard.charAt(0)=='2'){
-            cards.add(g.drawCard());
-            cards.add(g.drawCard());
+    ArrayList<String> drew=new ArrayList<>();
+    String card;
+        if(g.topCard.charAt(0)=='2'&&g.getDeckSize()>1){
+            card=g.drawCard();
+            cards.add(card);
+            drew.add(card);
+            card=g.drawCard() ;
+            cards.add(card);
+            drew.add(card);
         }else{
-            cards.add(g.drawCard());
+            card=g.drawCard();
+            cards.add(card);
+            drew.add(card);
         }
-        return cards;
+
+        return drew;
 
 }
 public int getPlayerID(){
