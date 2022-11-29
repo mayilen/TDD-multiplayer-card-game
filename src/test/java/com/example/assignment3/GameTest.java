@@ -79,6 +79,12 @@ public class GameTest {
         assertEquals(1,game.nextTurn());
     }
     @Test
+    public void maxPlayer() {
+        game = new Game();
+        game.setMaxPlayer(3);
+        assertEquals(3,game.maxPlayer);
+    }
+    @Test
     public void getDeckSize(){
         game=new Game();
         assertEquals(52,game.getDeckSize());
