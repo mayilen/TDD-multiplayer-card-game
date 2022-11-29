@@ -105,14 +105,14 @@ public class GameTest {
 
 
     }
-    @Test
-    public void setHand(){
-        game=new Game();
-        game.setHand(new ArrayList<>(Arrays.asList("2H")));
-        assertEquals(1,game.hand.size());
-        game.setHand(new ArrayList<>(Arrays.asList("2H","2D")));
-        assertEquals(2,game.hand.size());
-
-    }
+   @Test
+    public void nextTurn(){
+        Game game=new Game();
+        assertEquals(1,game.nextTurn());
+       assertEquals(2,game.nextTurn());
+       assertEquals(3,game.nextTurn());
+       assertEquals(0,game.nextTurn());
+       assertEquals(1,game.nextTurn());
+   }
 
 }
