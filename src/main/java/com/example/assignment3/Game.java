@@ -10,6 +10,8 @@ public class Game {
     public Game(){
         deckInitializer();
     }
+    public int direction=1;
+    public int currentTurn=0;
     public String topCard;
     public ArrayList<String> deckInitializer(){
         deck.clear();
@@ -33,6 +35,20 @@ public class Game {
     public boolean changeSuit(String suite){
         topCard=getCardRank(topCard)+suite;
         return true;
+    }
+    public int nextTurn(){
+
+        if(direction>0){
+            currentTurn++;
+        }else{
+            currentTurn--;
+        }
+        if(currentTurn>3){
+            currentTurn=0;
+        } else if (currentTurn<0) {
+            currentTurn=3;
+        }
+        return currentTurn;
     }
     public boolean canPlay(String c1){
        String[] cards= c1.split(",");
