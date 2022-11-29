@@ -72,6 +72,9 @@ public class GameTest {
         game.topCard="3D";
         game.playCard("5D");
         assertEquals("5D",game.topCard);
+        game.playCard("1D");
+        assertEquals(-1,game.direction);
+        assertEquals(3,game.nextTurn());
     }
     @Test
     public void getDeckSize(){
