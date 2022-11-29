@@ -78,4 +78,12 @@ public class PlayerTest {
     player.cards.add("5S");
     assertEquals(85,player.scoreCalc());
 }
+    @Test
+    public void hasWon(){
+        Game game=new Game();
+        player = new Player(1);
+        assertTrue(player.hasWon());
+        player.cards.add("3S");
+        assertFalse(player.hasWon());
+    }
 }
