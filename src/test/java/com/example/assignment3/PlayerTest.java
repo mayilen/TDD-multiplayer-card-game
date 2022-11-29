@@ -63,5 +63,19 @@ public class PlayerTest {
        assertTrue(player.playCards("7H,5H",game));
         assertFalse(player.playCards("7H",game));
     }
-
+@Test
+    public void scoreCalc(){
+    Game game=new Game();
+    player = new Player(1);
+    player.cards.add("8S");
+    assertEquals(50,player.scoreCalc());
+    player.cards.add("QS");
+    assertEquals(60,player.scoreCalc());
+    player.cards.add("KS");
+    assertEquals(70,player.scoreCalc());
+    player.cards.add("JS");
+    assertEquals(80,player.scoreCalc());
+    player.cards.add("5S");
+    assertEquals(85,player.scoreCalc());
+}
 }
