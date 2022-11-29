@@ -1,14 +1,31 @@
 package com.example.assignment3;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class Player {
     public int playerID;
-
+    public int score=0;
+    Game game=new Game();
     public ArrayList<String> cards=new ArrayList<>();
     public Player(int id){
         playerID=id;
 
+    }
+    public int scoreCalc(){
+        int c=0;
+        for (String card:cards
+             ) {
+            if(Objects.equals(game.getCardRank(card), "8")){
+                c+=50;
+            } else if (Objects.equals(game.getCardRank(card), "J")||Objects.equals(game.getCardRank(card), "Q")||Objects.equals(game.getCardRank(card), "K")) {
+                c+=10;
+            }else {
+                c += Integer.parseInt(game.getCardRank(card));
+            }
+        }
+        score+=c;
+        return c;
     }
 public ArrayList<String> drawIntialHand(Game g){
         cards=g.dealHand();
@@ -46,7 +63,7 @@ public boolean playCards(String c,Game g){
                     return false;
                 }
             }
-            g.nextTurn();     
+            g.nextTurn();
             return true;
         }
         return false;
