@@ -86,6 +86,7 @@ public class Game {
     public String drawCard(){
         return deck.remove(deck.size()-1);
     }
+
     public String getCardSuit(String c){
         return c.substring(1);
     }
@@ -94,6 +95,9 @@ public class Game {
     }
     public String playCard(String c){
         topCard=c;
+        if(Objects.equals(getCardRank(topCard), "1")) {
+            direction=direction*-1;
+        }
         return topCard;
     }
     public int getDeckSize(){
