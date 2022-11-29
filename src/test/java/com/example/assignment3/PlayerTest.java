@@ -61,5 +61,6 @@ public class PlayerTest {
         player.cards.add("5H");
         game.topCard="2H";
        assertTrue(player.playCards("7H,5H"));
+        assertFalse(player.playCards("7H"));
     }
 }
