@@ -20,15 +20,23 @@ var socket = new SockJS('/room');
         setConnected(true);
         console.log('Connected: ' + frame);
         stompClient.subscribe('/topic/greetings', function (greeting) {
-            showGreeting(JSON.parse(greeting.body))
+            setPlayerNum(JSON.parse(greeting.body))
+            //showGreeting(true);
            // console.log("JSON.parse(greeting.body): "+JSON.parse(greeting.body))
 
         });
+stompClient.subscribe('/topic/scores', function (greeting) {
+            console.log("llllkkkkokok"+JSON.parse(greeting.body))
+            loadScores(JSON.parse(greeting.body))
+            //showGreeting(true);
+           // console.log("JSON.parse(greeting.body): "+JSON.parse(greeting.body))
 
+        });
  stompClient.subscribe('/user/queue/specific-user/'
               + id, function (msgOut) {
               console.log("msg: "+JSON.parse(msgOut.body))
         showHand(JSON.parse(msgOut.body));
+            $("#greetings").hide
             })
     });
  setTimeout(function () {
@@ -39,7 +47,12 @@ var socket = new SockJS('/room');
      }, 1000);
 
 }
-
+function loadScores(scores){
+    for(let i=0;i<scores.length;i++){
+        $("#score"+(i+1)).html(scores[i]);
+        console.log(scores[i])
+    }
+}
 function disconnect() {
     if (stompClient !== null) {
         stompClient.disconnect();
@@ -48,7 +61,14 @@ function disconnect() {
     console.log("Disconnected");
 }
 function showGreeting(message) {
-    $("#greetings").append("<tr><td>" + message.message + "</td></tr>");
+
+    $("#greetings").hide;
+
+
+}
+function setPlayerNum(num){
+console.log(num);
+    $("#playerID").html(num);
 }
 function play(){
 
