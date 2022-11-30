@@ -37,7 +37,7 @@ public class Player {
                 return true;
             }
         }
-        return g.getDeckSize() > 1;
+        return false;
     }
 public ArrayList<String> drawIntialHand(Game g){
         cards=g.dealHand();

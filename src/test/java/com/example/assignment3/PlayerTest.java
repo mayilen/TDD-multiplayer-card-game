@@ -34,9 +34,8 @@ public class PlayerTest {
         assertTrue(player.canPlay(game));
        player.playCards("JS",game);
        player.cards.add("KD");
-       assertTrue(player.canPlay(game));
-       game.deck=new ArrayList<>();
-        assertFalse(player.canPlay(game));
+       assertFalse(player.canPlay(game));
+
     }
         @Test
     public void drawCard()
