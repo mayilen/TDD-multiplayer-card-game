@@ -1,6 +1,7 @@
 package com.example.assignment3;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Objects;
 
 public class Player {
@@ -39,10 +40,19 @@ public class Player {
         }
         return false;
     }
+
 public ArrayList<String> drawIntialHand(Game g){
         cards=g.dealHand();
         return cards;
 }
+public void setHand(String[] c,Game g){
+    g.deck.addAll(cards);
+    cards.clear();
+    cards.addAll(Arrays.asList(c));
+}
+public ArrayList<String> getCards(){
+        return cards;
+    }
 public ArrayList<String> drawCard(Game g){
     ArrayList<String> drew=new ArrayList<>();
     String card;
