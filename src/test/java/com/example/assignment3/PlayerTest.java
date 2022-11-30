@@ -26,6 +26,19 @@ public class PlayerTest {
         assertEquals(cards,player.cards);
     }
     @Test
+    public void canPlay() {
+        Game game = new Game();
+        player = new Player(1);
+        game.topCard="QS";
+        player.cards.add("JS");
+        assertTrue(player.canPlay(game));
+       player.playCards("JS",game);
+       player.cards.add("KD");
+       assertTrue(player.canPlay(game));
+       game.deck=new ArrayList<>();
+        assertFalse(player.canPlay(game));
+    }
+        @Test
     public void drawCard()
     {
         Game game=new Game();
