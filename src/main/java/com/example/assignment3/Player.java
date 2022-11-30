@@ -30,6 +30,15 @@ public class Player {
     public Boolean hasWon(){
         return cards.size()==0;
     }
+    public Boolean canPlay(Game g){
+
+        for (String s:cards ) {
+            if(g.canPlay(s)){
+                return true;
+            }
+        }
+        return g.getDeckSize() > 1;
+    }
 public ArrayList<String> drawIntialHand(Game g){
         cards=g.dealHand();
         return cards;
@@ -49,7 +58,6 @@ public ArrayList<String> drawCard(Game g){
             cards.add(card);
             drew.add(card);
         }
-
         return drew;
 
 }
