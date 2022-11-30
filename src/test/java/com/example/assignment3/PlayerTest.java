@@ -37,6 +37,17 @@ public class PlayerTest {
        assertFalse(player.canPlay(game));
 
     }
+    @Test
+    public void setHandTest(){
+    Game game = new Game();
+    player = new Player(1);
+    ArrayList<String> card=new ArrayList<>();
+    player.drawIntialHand(game);
+    card= new ArrayList<>(player.cards);
+    player.setHand(new String[]{"KD"},game);
+    assertNotEquals(card.size(),player.cards.size());
+
+}
         @Test
     public void drawCard()
     {
@@ -48,7 +59,7 @@ public class PlayerTest {
         cards=player.drawIntialHand(game);
         game.topCard="5S";
         assertEquals(1,player.drawCard(game).size());
-
+        assertEquals(46,game.deck.size());
         assertEquals(6,cards.size());
         game.topCard="2S";
         assertEquals(cards,player.cards);
