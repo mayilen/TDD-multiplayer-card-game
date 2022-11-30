@@ -15,6 +15,14 @@ public class GameController {
     private Game game;
     public ArrayList<Player> players=new ArrayList<>();
 
+    public String sendScores(){
+        ArrayList<Integer> scores=new ArrayList<Integer>();
+        for (Player p:
+             players) {
+            scores.add(p.score);
+        }
+        return scores.toString();
+           }
     @MessageMapping("/hello")
     @SendTo("/topic/greetings")
     public int greet(HelloMessage m) throws Exception {
