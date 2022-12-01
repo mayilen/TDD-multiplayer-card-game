@@ -11,7 +11,7 @@ import java.util.ArrayList;
 public class GameController {
     @Autowired
     private SimpMessagingTemplate simpMessagingTemplate;
-    private int counter=-1;
+
     private Game game;
     public ArrayList<Player> players=new ArrayList<>();
 

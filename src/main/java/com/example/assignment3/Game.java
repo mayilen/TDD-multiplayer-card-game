@@ -107,7 +107,6 @@ public class Game {
         return deck.size();
     }
     public  ArrayList<String>  dealHand(){
-        System.out.println(deck.size());
         ArrayList<String> hand=new ArrayList<>();
         for(int i=0;i<5;i++){
             hand.add(drawCard());
