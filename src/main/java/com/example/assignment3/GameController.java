@@ -28,12 +28,13 @@ public class GameController {
     public int greet(HelloMessage m) throws Exception {
         Thread.sleep(500);
         game=new Game();
-        players.add(new Player(m.getId()));
+        game.players.add(new Player(m.getId()));
         if(players.size()>1){
-
+            game.players.get(0).cards=game.dealHand();
+            game.players.get(1).cards=game.dealHand();
             System.out.println("sfgsdfg");
-            sendSpecific(players.get(0).getPlayerID(), players.get(0).drawIntialHand(game).toString());
-            sendSpecific(players.get(1).getPlayerID(), players.get(1).drawIntialHand(game).toString());
+            sendSpecific(players.get(0).getPlayerID(), game.players.get(0).cards.toString());
+            sendSpecific(players.get(1).getPlayerID(), game.players.get(1).cards.toString());
 
             simpMessagingTemplate.convertAndSend("/topic/scores",sendScores());
         }
