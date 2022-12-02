@@ -31,16 +31,6 @@ public class Player {
     public Boolean hasWon(){
         return cards.size()==0;
     }
-    public Boolean canPlay(Game g){
-
-        for (String s:cards ) {
-            if(g.canPlay(s)){
-                return true;
-            }
-        }
-        return false;
-    }
-
 public void setHand(String[] c,Game g){
     g.deck.addAll(cards);
     cards.clear();
