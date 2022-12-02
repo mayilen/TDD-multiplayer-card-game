@@ -12,6 +12,8 @@ public class Game {
     }
     public int direction=1;
     public int currentTurn=0;
+    public int startRoundIndex=0;
+    public boolean drew2=false;
     public String topCard;
     public int maxPlayer;
     public ArrayList<String> deckInitializer(){
@@ -52,17 +54,17 @@ public class Game {
         return currentTurn;
     }
     public boolean canPlay(String c1){
+
        String[] cards= c1.split(",");
        Boolean verify;
+
        if(Objects.equals(getCardRank(topCard), "2")){
-           if(cards.length==1&&Objects.equals(getCardRank(cards[0]), "2")){
-               return true;
-           }else if(cards.length!=1&&Objects.equals(getCardRank(cards[0]), "2")){
+
+           if (cards.length==1&&!drew2) {
                return false;
-           } else if (cards.length==1&&!Objects.equals(getCardRank(cards[0]), "2")) {
+           }else if(cards.length!=1&&drew2){
                return false;
            }
-
            for(int i=0;i<cards.length;i++){
            if(i==0){
             verify=Objects.equals(getCardSuit(cards[0]), getCardSuit(topCard)) ||(Objects.equals(getCardRank(cards[0]), getCardRank(topCard)));
@@ -117,5 +119,6 @@ public class Game {
     public void setMaxPlayer(int p){
         maxPlayer=p;
     }
+
 }
 
