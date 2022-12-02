@@ -138,6 +138,15 @@ public class GameTest {
        assertEquals(1,game.nextTurn());
    }
     @Test
+    public void nextRound(){
+        Game game=new Game();
+        assertEquals(1,game.nextRound());
+        assertEquals(2,game.nextRound());
+        assertEquals(3,game.nextRound());
+        assertEquals(0,game.nextRound());
+        assertEquals(1,game.nextRound());
+    }
+    @Test
     public void canPlayerPlay(){
         Game game=new Game();
         game.players.add(new Player(1));
