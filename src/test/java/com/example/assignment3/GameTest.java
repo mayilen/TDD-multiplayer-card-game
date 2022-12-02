@@ -125,5 +125,16 @@ public class GameTest {
        assertEquals(0,game.nextTurn());
        assertEquals(1,game.nextTurn());
    }
-
+    @Test
+    public void canPlayerPlay(){
+        Game game=new Game();
+        game.players.add(new Player(1));
+        assertTrue(game.canPlayerPlay(0));
+        game.topCard="3S";
+        game.deck.clear();
+        game.players.get(0).setHand(new String[]{"3H"});
+        assertTrue(game.canPlayerPlay(0));
+        game.players.get(0).setHand(new String[]{"4D"});
+        assertFalse(game.canPlayerPlay(0));
+    }
 }
