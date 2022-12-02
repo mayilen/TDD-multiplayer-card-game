@@ -22,70 +22,24 @@ public class PlayerTest {
         player = new Player(1);
 
          ArrayList<String> cards=new ArrayList<>();
-        cards=player.drawIntialHand(game);
-        assertEquals(cards,player.cards);
-    }
-    @Test
-    public void canPlay() {
-        Game game = new Game();
-        player = new Player(1);
-        game.topCard="QS";
-        player.cards.add("JS");
-        assertTrue(player.canPlay(game));
-       player.playCards("JS",game);
-       player.cards.add("KD");
-       assertFalse(player.canPlay(game));
+        player.cards=game.dealHand();
 
+        assertEquals(5,player.cards.size());
     }
+
     @Test
     public void setHandTest(){
     Game game = new Game();
     player = new Player(1);
     ArrayList<String> card=new ArrayList<>();
-    player.drawIntialHand(game);
+    player.cards=game.dealHand();
     card= new ArrayList<>(player.cards);
     player.setHand(new String[]{"KD"},game);
     assertNotEquals(card.size(),player.cards.size());
 
 }
-        @Test
-    public void drawCard()
-    {
-        Game game=new Game();
-        player = new Player(1);
 
 
-        ArrayList<String> cards=new ArrayList<>();
-        cards=player.drawIntialHand(game);
-        game.topCard="5S";
-        assertEquals(1,player.drawCard(game).size());
-        assertEquals(46,game.deck.size());
-        assertEquals(6,cards.size());
-        game.topCard="2S";
-        assertEquals(cards,player.cards);
-        assertEquals(2,player.drawCard(game).size());
-
-        assertEquals(8,cards.size());
-    }
-    @Test
-    public void playCard()
-    {
-        Game game=new Game();
-        player = new Player(1);
-
-
-        ArrayList<String> cards=new ArrayList<>();
-        player.cards.add("4S");
-        player.cards.add("7H");
-
-        game.topCard="5S";
-        assertTrue(player.playCards("4S",game));
-        assertFalse(player.playCards("7H",game));
-        player.cards.add("5H");
-        game.topCard="2H";
-       assertTrue(player.playCards("7H,5H",game));
-        assertFalse(player.playCards("7H",game));
-    }
 @Test
     public void scoreCalc(){
     Game game=new Game();
