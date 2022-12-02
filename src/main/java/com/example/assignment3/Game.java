@@ -113,7 +113,7 @@ public class Game {
             return true;
         }else{
             for (String c:
-                 players.get(0).cards) {
+                 players.get(p).cards) {
                 if(canPlay(c)){
                     return true;
                 }
