@@ -89,7 +89,18 @@ public class Game {
     public String drawCard(){
         return deck.remove(deck.size()-1);
     }
-
+    public ArrayList<String> drawtwo(){
+        ArrayList<String> drew=new ArrayList<>();
+        if(deck.size()>1){
+            drew.add(drawCard());
+            drew.add(drawCard());
+        }else{
+            if(canDraw()){
+                drew.add(drawCard());
+            }
+        }
+        return drew;
+    }
     public String getCardSuit(String c){
         return c.substring(1);
     }
