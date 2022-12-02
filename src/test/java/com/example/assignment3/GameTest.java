@@ -49,6 +49,18 @@ public class GameTest {
         assertEquals(52,game.deck.size());
         game.drawCard();
         assertEquals(51,game.deck.size());
+
+    }
+    @Test
+    public void drawTwo(){
+        game=new Game();
+        assertEquals(52,game.deck.size());
+        game.drawtwo();
+        assertEquals(50,game.deck.size());
+        game.deck.clear();
+        game.deck.add("3S");
+        game.drawtwo();
+        assertEquals(0,game.deck.size());
     }
     @Test
     public void getCardSuit(){
@@ -137,4 +149,5 @@ public class GameTest {
         game.players.get(0).setHand(new String[]{"4D"});
         assertFalse(game.canPlayerPlay(0));
     }
+
 }
