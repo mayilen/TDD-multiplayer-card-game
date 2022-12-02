@@ -31,8 +31,7 @@ public class Player {
     public Boolean hasWon(){
         return cards.size()==0;
     }
-public void setHand(String[] c,Game g){
-    g.deck.addAll(cards);
+public void setHand(String[] c){
     cards.clear();
     cards.addAll(Arrays.asList(c));
 }
