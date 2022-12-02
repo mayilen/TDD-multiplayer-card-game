@@ -107,10 +107,11 @@ public class GameTest {
         assertTrue(game.canPlay("9H"));
         assertFalse(game.canPlay("2C"));
         game.topCard="2D";
-        assertTrue(game.canPlay("2S"));
-        assertFalse(game.canPlay("7D"));
-        assertFalse(game.canPlay("2D,7D"));
+        assertFalse(game.canPlay("2S"));
         assertTrue(game.canPlay("7D,3D"));
+        game.drew2=true;
+        assertTrue(game.canPlay("7D"));
+        assertFalse(game.canPlay("2D,7D"));
         game.topCard="7H";
         assertFalse(game.canPlay("7D,3H"));
 
