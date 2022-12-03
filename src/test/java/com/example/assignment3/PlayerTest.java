@@ -34,7 +34,7 @@ public class PlayerTest {
     ArrayList<String> card=new ArrayList<>();
     player.cards=game.dealHand();
     card= new ArrayList<>(player.cards);
-    player.setHand(new String[]{"KD"});
+    player.setHand("KD");
     assertNotEquals(card.size(),player.cards.size());
 
 }
