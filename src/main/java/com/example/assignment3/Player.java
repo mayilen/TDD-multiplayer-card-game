@@ -31,9 +31,10 @@ public class Player {
     public Boolean hasWon(){
         return cards.size()==0;
     }
-public void setHand(String[] c){
+public void setHand(String c){
+    String[] c2= c.split(",");
     cards.clear();
-    cards.addAll(Arrays.asList(c));
+    cards.addAll(Arrays.asList(c2));
 }
 public int getPlayerID(){
         return playerID;
