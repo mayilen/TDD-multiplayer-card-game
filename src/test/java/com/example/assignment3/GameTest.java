@@ -55,7 +55,7 @@ public class GameTest {
         game.topCard="2S";
         assertEquals(2,game.incrementPlus2("2S"));
         assertEquals(1,game.incrementPlus2("JS"));
-       
+
 
     }
 
@@ -65,10 +65,14 @@ public class GameTest {
         assertEquals(52,game.deck.size());
         game.drawtwo();
         assertEquals(50,game.deck.size());
+        game.plus2Count=2;
+        game.drawtwo();
+        assertEquals(46,game.deck.size());
         game.deck.clear();
         game.deck.add("3S");
         game.drawtwo();
         assertEquals(0,game.deck.size());
+
     }
     @Test
     public void getCardSuit(){
