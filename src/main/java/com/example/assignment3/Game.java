@@ -12,7 +12,7 @@ public class Game {
     }
     public int direction=1;
     public int currentTurn=0;
-    public int startRoundIndex=1;
+    public int startRoundIndex=0;
     public boolean drew2=false;
     public String topCard;
     public int maxPlayer=3;
