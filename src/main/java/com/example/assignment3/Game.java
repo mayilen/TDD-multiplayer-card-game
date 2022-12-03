@@ -15,7 +15,7 @@ public class Game {
     public int startRoundIndex=1;
     public boolean drew2=false;
     public String topCard;
-    public int maxPlayer;
+    public int maxPlayer=3;
     public ArrayList<String> deckInitializer(){
         deck.clear();
         for(int i=0;i<rank.size();i++){
@@ -112,11 +112,14 @@ public class Game {
         return String.valueOf(c.charAt(0));
     }
     public String playCard(String c){
-        topCard=c;
+        String[] cards= c.split(",");
+        for(int i=0;i<cards.length;i++){
+        topCard=cards[i];
         if(Objects.equals(getCardRank(topCard), "1")) {
             direction=direction*-1;
         } else if (Objects.equals(getCardRank(topCard), "Q")) {
             nextTurn();
+        }
         }
         return topCard;
     }
