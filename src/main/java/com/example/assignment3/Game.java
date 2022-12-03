@@ -109,9 +109,10 @@ public class Game {
     }
     public ArrayList<String> drawtwo(){
         ArrayList<String> drew=new ArrayList<>();
-        if(deck.size()>1){
+        if(deck.size()>2*plus2Count){
+            for(int i=0;i<2*plus2Count;i++){
             drew.add(drawCard());
-            drew.add(drawCard());
+        }
         }else{
             if(canDraw()){
                 drew.add(drawCard());
@@ -128,6 +129,7 @@ public class Game {
     public String playCard(String c){
         String[] cards= c.split(",");
         for(int i=0;i<cards.length;i++){
+            incrementPlus2(cards[i]);
         topCard=cards[i];
         if(Objects.equals(getCardRank(topCard), "1")) {
             direction=direction*-1;
