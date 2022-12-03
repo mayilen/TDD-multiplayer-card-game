@@ -50,6 +50,16 @@ public class GameTest {
 
     }
     @Test
+    public void incrementPlus2(){
+        game=new Game();
+        game.topCard="2S";
+        assertEquals(2,game.incrementPlus2("2S"));
+        assertEquals(1,game.incrementPlus2("JS"));
+       
+
+    }
+
+    @Test
     public void drawTwo(){
         game=new Game();
         assertEquals(52,game.deck.size());
