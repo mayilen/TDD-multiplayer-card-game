@@ -71,15 +71,15 @@ public class Game {
            }
            for(int i=0;i<cards.length;i++){
            if(i==0){
-            verify=Objects.equals(getCardSuit(cards[0]), getCardSuit(topCard)) ||(Objects.equals(getCardRank(cards[0]), getCardRank(topCard)));
+            verify=Objects.equals(getCardRank(cards[0]),"8")|| Objects.equals(getCardSuit(cards[0]), getCardSuit(topCard)) ||(Objects.equals(getCardRank(cards[0]), getCardRank(topCard)));
            }else {
-               verify=Objects.equals(getCardSuit(cards[i-1]), getCardSuit(cards[i])) ||(Objects.equals(getCardRank(cards[i-1]), getCardRank(cards[i])));
+               verify=Objects.equals(getCardRank(cards[i]),"8")||Objects.equals(getCardSuit(cards[i-1]), getCardSuit(cards[i])) ||(Objects.equals(getCardRank(cards[i-1]), getCardRank(cards[i])));
            }
            if(!verify) return false;
        }
        }else{
            if(cards.length==1) {
-               return Objects.equals(getCardSuit(cards[0]), getCardSuit(topCard)) || (Objects.equals(getCardRank(cards[0]), getCardRank(topCard)));
+               return Objects.equals(getCardRank(cards[0]),"8")||Objects.equals(getCardSuit(cards[0]), getCardSuit(topCard)) || (Objects.equals(getCardRank(cards[0]), getCardRank(topCard)));
            }else{
                return false;
            }
