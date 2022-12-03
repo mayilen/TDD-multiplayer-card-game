@@ -108,6 +108,7 @@ public class Game {
         return deck.remove(deck.size()-1);
     }
     public ArrayList<String> drawtwo(){
+        drew2=true;
         ArrayList<String> drew=new ArrayList<>();
         if(deck.size()>2*plus2Count){
             for(int i=0;i<2*plus2Count;i++){
@@ -131,6 +132,9 @@ public class Game {
         for(int i=0;i<cards.length;i++){
             incrementPlus2(cards[i]);
         topCard=cards[i];
+        if(Objects.equals(getCardRank(cards[i]),"2")){
+            drew2=false;
+        }
         if(Objects.equals(getCardRank(topCard), "1")) {
             direction=direction*-1;
         } else if (Objects.equals(getCardRank(topCard), "Q")) {
