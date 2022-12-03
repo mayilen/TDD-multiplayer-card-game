@@ -123,6 +123,9 @@ public class Game {
     public int getDeckSize(){
         return deck.size();
     }
+    public boolean cardsExist(int p,String c){
+        return (players.get(p).cards.contains(c));
+    }
     public boolean canPlayerPlay(int p){
         if(deck.size()>1){
             return true;
