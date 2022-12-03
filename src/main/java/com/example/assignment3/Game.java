@@ -110,7 +110,7 @@ public class Game {
     public ArrayList<String> drawtwo(){
         drew2=true;
         ArrayList<String> drew=new ArrayList<>();
-        if(deck.size()>2*plus2Count){
+        if(deck.size()>=2*plus2Count){
             for(int i=0;i<2*plus2Count;i++){
             drew.add(drawCard());
         }
