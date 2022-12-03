@@ -85,10 +85,14 @@ public class GameTest {
         game.playCard("5D");
         assertEquals("5D",game.topCard);
         game.playCard("1D");
+        assertEquals(0,game.currentTurn);
         assertEquals(-1,game.direction);
         assertEquals(3,game.nextTurn());
         game.playCard("QD");
         assertEquals(1,game.nextTurn());
+        game.topCard="3D";
+        game.playCard("5D,4D");
+        assertEquals("4D",game.topCard);
     }
     @Test
     public void maxPlayer() {
@@ -154,9 +158,9 @@ public class GameTest {
         assertTrue(game.canPlayerPlay(0));
         game.topCard="3S";
         game.deck.clear();
-        game.players.get(0).setHand(new String[]{"3H"});
+        game.players.get(0).setHand("3H");
         assertTrue(game.canPlayerPlay(0));
-        game.players.get(0).setHand(new String[]{"4D"});
+        game.players.get(0).setHand("4D");
         assertFalse(game.canPlayerPlay(0));
     }
     @Test
