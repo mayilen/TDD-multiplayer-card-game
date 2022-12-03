@@ -105,6 +105,9 @@ public class GameTest {
         game.topCard="3D";
         game.playCard("5D,4D");
         assertEquals("4D",game.topCard);
+        game.playCard("2D");
+        assertFalse(game.drew2);
+        assertFalse(game.canPlay("2S"));
     }
     @Test
     public void maxPlayer() {
