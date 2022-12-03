@@ -132,7 +132,8 @@ public class Game {
         return deck.size();
     }
     public boolean cardsExist(int p,String c){
-        return (players.get(p).cards.contains(c));
+        String[] cards= c.split(",");
+        return (players.get(p).cards.containsAll(List.of(cards)));
     }
     public boolean canPlayerPlay(int p){
         if(deck.size()>1){

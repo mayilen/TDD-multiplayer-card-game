@@ -176,6 +176,7 @@ public class GameTest {
         game.topCard="3S";
         game.players.get(0).cards.add("5S");
         game.players.get(0).cards.add("2S");
-        assertTrue(game.cardsExist(0,"5S"));
+        assertTrue(game.cardsExist(0,"5S,2S"));
+
     }
 }
