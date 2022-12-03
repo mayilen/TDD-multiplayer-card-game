@@ -12,9 +12,9 @@ public class GameControllerTest
     @Test
     public void getScoresTest(){
         GameController g = new GameController();
-        g.players=new ArrayList<>();
-        g.players.add(new Player(1));
-        g.players.get(0).score=2;
+        g.game.players=new ArrayList<>();
+        g.game.players.add(new Player(1));
+        g.game.players.get(0).score=2;
         assertEquals("[2]",g.sendScores());
     }
 }
