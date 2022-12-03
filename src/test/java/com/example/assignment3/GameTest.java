@@ -32,11 +32,9 @@ public class GameTest {
     public void intializeTopCard(){
         game = new Game();
         game.deck= new ArrayList<>();
-        game.deck.add("5S");
+        game.deck.add("8S");
         game.deck.add("1S");
-        game.deck.add("QS");
-        game.deck.add("2S");
-        assertEquals("5S",game.intializeTopCard());
+        assertEquals("1S",game.intializeTopCard());
     }
     @Test
     public void deckInitializer(){
