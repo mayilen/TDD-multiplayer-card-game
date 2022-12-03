@@ -28,11 +28,12 @@ public class Game {
     }
     public String intializeTopCard(){
         String drawcard=drawCard();
-        while(drawcard.contains("2")||drawcard.contains("Q")||drawcard.contains("1")){
-            deck.add(0,drawcard);
+        while(drawcard.contains("8")){
+
+            deck.add( (int)(Math.random()*deck.size()),drawcard);
             drawcard=drawCard();
         }
-        topCard=drawcard;
+        playCard(drawcard);
         return topCard;
     }
     public boolean changeSuit(String suite){
