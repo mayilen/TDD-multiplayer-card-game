@@ -126,6 +126,7 @@ public class GameTest {
         assertFalse(game.canPlay("2D,7D"));
         game.topCard="7H";
         assertFalse(game.canPlay("7D,3H"));
+        assertTrue(game.canPlay("8D"));
 
     }
    @Test
