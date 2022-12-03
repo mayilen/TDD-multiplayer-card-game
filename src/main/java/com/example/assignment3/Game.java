@@ -13,6 +13,7 @@ public class Game {
     public int direction=1;
     public int currentTurn=0;
     public int startRoundIndex=0;
+    public int plus2Count=1;
     public boolean drew2=false;
     public String topCard;
     public int maxPlayer=3;
@@ -35,6 +36,14 @@ public class Game {
         }
         playCard(drawcard);
         return topCard;
+    }
+    public int incrementPlus2(String c){
+        if(Objects.equals(getCardRank(topCard), "2") && Objects.equals(getCardRank(c), "2")){
+            plus2Count+=1;
+        }else{
+            plus2Count=1;
+        }
+        return plus2Count;
     }
     public boolean changeSuit(String suite){
         topCard=getCardRank(topCard)+suite;
