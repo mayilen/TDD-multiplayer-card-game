@@ -62,6 +62,7 @@ public class GameTest {
     @Test
     public void drawTwo(){
         game=new Game();
+        game.topCard="3S";
         assertEquals(52,game.deck.size());
         game.drawtwo();
         assertEquals(50,game.deck.size());
@@ -72,6 +73,16 @@ public class GameTest {
         game.deck.add("3S");
         game.drawtwo();
         assertEquals(0,game.deck.size());
+        game.plus2Count=1;
+        game.topCard="2S";
+        game.deck.add("3S");
+        game.deck.add("2H");
+        game.deck.add("5D");
+        ArrayList<String> cards=game.drawtwo();
+        assertTrue(game.canPlay(cards.get(1)));
+        game.playCard(cards.get(1));
+        assertEquals(2,game.plus2Count);
+
 
     }
     @Test
