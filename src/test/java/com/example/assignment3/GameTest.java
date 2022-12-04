@@ -179,6 +179,34 @@ public class GameTest {
        assertEquals(3,game.nextTurn());
    }
     @Test
+    public void isGameDone(){
+        Game game=new Game();
+        game.players.add(new Player(1));
+        game.players.add(new Player(2));
+        game.topCard="9H";
+        game.players.get(0).setHand("3C");
+        game.players.get(1).setHand("4H");
+        game.players.get(0).canPlay=game.canPlayerPlay(0);
+        game.players.get(1).canPlay=game.canPlayerPlay(1);
+        assertTrue(game.players.get(0).canPlay);
+        assertTrue(game.players.get(1).canPlay);
+        assertFalse(game.isGameDone());
+        game.deck.clear();
+        game.players.get(0).canPlay=game.canPlayerPlay(0);
+        game.players.get(1).canPlay=game.canPlayerPlay(1);
+
+        assertFalse(game.players.get(0).canPlay);
+        assertTrue(game.players.get(1).canPlay);
+        assertFalse(game.isGameDone());
+        game.players.get(1).setHand("4D");
+        game.players.get(0).canPlay=game.canPlayerPlay(0);
+        game.players.get(1).canPlay=game.canPlayerPlay(1);
+        assertFalse(game.players.get(0).canPlay);
+        assertFalse(game.players.get(1).canPlay);
+        assertTrue(game.isGameDone());
+    }
+
+    @Test
     public void nextRound(){
         Game game=new Game();
         assertEquals(0,game.nextRound());
