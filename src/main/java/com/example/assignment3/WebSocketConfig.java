@@ -26,7 +26,7 @@ private int counter=0;
 
     @Override
     public void configureMessageBroker(MessageBrokerRegistry registry) {
-        registry.enableSimpleBroker("/topic","/user/queue/specific-user/");
+        registry.enableSimpleBroker("/topic","/user/queue/hand/","/user/queue/turn/");
         registry.setApplicationDestinationPrefixes("/app");
         registry.setUserDestinationPrefix("/user");
 
