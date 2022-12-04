@@ -34,7 +34,7 @@ public class Game {
             deck.add( (int)(Math.random()*deck.size()),drawcard);
             drawcard=drawCard();
         }
-        playCard(drawcard);
+        topCard=drawcard;
         return topCard;
     }
     public int incrementPlus2(String c){
@@ -56,10 +56,10 @@ public class Game {
         }else{
             currentTurn--;
         }
-        if(currentTurn>maxPlayer){
+        if(currentTurn>3){
             currentTurn=0;
         } else if (currentTurn<0) {
-            currentTurn=maxPlayer;
+            currentTurn=3;
         }
         return currentTurn;
     }
