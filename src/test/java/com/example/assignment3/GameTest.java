@@ -175,6 +175,8 @@ public class GameTest {
        assertEquals(3,game.nextTurn());
        assertEquals(0,game.nextTurn());
        assertEquals(1,game.nextTurn());
+       assertEquals(2,game.nextTurn());
+       assertEquals(3,game.nextTurn());
    }
     @Test
     public void nextRound(){
