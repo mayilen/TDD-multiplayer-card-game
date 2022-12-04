@@ -63,6 +63,14 @@ public class Game {
         }
         return currentTurn;
     }
+    public boolean isGameDone(){
+        for(int i=0;i<players.size();i++){
+            if(players.get(i).canPlay){
+                return false;
+            }
+        }
+        return true;
+    }
     public int nextRound(){
         int round=startRoundIndex++;
         return round%4;
