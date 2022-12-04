@@ -8,5 +8,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Greeting {
-    public String message;
+    public int player;
+    public String error;
+    public String card;
+    public String playerTurn;
+
 }

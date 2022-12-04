@@ -10,6 +10,10 @@ import lombok.NoArgsConstructor;
 public class HelloMessage {
 
     private int id;
+    public String card;
+    public String suite;
+
+
 
     @Override
     public String toString() {
@@ -19,4 +23,6 @@ public class HelloMessage {
     public int getId() {
         return id;
     }
+
+
 }
