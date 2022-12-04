@@ -11,6 +11,7 @@ public class Game {
         deckInitializer();
     }
     public int direction=1;
+    public int skippedIndex;
     public int currentTurn=0;
     public int startRoundIndex=0;
     public int plus2Count=1;
@@ -150,10 +151,25 @@ public class Game {
         if(Objects.equals(getCardRank(topCard), "1")) {
             direction=direction*-1;
         } else if (Objects.equals(getCardRank(topCard), "Q")) {
+            skippedIndex();
             nextTurn();
         }
         }
         return topCard;
+    }
+    public void skippedIndex(){
+        int skipped=currentTurn;
+        if(direction>0){
+            skipped++;
+        }else{
+            skipped--;
+        }
+        if(skipped>3){
+            skipped=0;
+        } else if (skipped<0) {
+            skipped=3;
+        }
+        skippedIndex=skipped;
     }
     public int getDeckSize(){
         return deck.size();
