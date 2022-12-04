@@ -26,7 +26,12 @@ public class PlayerTest {
 
         assertEquals(5,player.cards.size());
     }
-
+@Test
+public void canplay(){
+    player = new Player(1);
+    player.canPlay=true;
+    assertTrue(player.canPlay);
+}
     @Test
     public void setHandTest(){
     Game game = new Game();
