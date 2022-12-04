@@ -140,6 +140,14 @@ public class GameTest {
         assertEquals(2,game.players.get(0).cards.size());
     }
     @Test
+    public void addToPlayerHand(){
+        game=new Game();
+        game.players.add(new Player(1));
+        game.players.get(0).setHand("3H,7D,9H");
+        game.addToPlayerHand(0,"9D");
+        assertEquals(4,game.players.get(0).cards.size());
+    }
+    @Test
     public void canDraw(){
         game=new Game();
         assertTrue(game.canDraw());
