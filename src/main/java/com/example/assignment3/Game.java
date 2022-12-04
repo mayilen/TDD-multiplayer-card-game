@@ -109,6 +109,10 @@ public class Game {
         String[] card= c.split(",");
         players.get(p).cards.removeAll(List.of(card));
     }
+    public void addToPlayerHand(int p,String c){
+        String[] card= c.split(",");
+        players.get(p).cards.addAll(List.of(card));
+    }
     public boolean canDraw(){
         return getDeckSize()>0;
     }
