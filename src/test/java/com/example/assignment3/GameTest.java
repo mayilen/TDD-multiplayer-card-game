@@ -55,8 +55,6 @@ public class GameTest {
         game.topCard="2S";
         assertEquals(2,game.incrementPlus2("2S"));
         assertEquals(1,game.incrementPlus2("JS"));
-
-
     }
 
     @Test
@@ -186,6 +184,14 @@ public class GameTest {
        assertEquals(2,game.nextTurn());
        assertEquals(3,game.nextTurn());
    }
+    @Test
+    public void skippedIndex(){
+        Game game=new Game();
+        game.topCard="QC";
+        game.playCard("QD");
+        assertEquals(1,game.skippedIndex);
+        assertEquals(2,game.nextTurn());
+    }
     @Test
     public void isGameDone(){
         Game game=new Game();
