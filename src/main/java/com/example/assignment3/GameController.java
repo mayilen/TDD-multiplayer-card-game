@@ -67,19 +67,25 @@ public class GameController {
 
         } else {
 
-            g.error="You do not have those cards";
-            sendSpecific(game.players.get(game.currentTurn).getPlayerID(),g);
+            g.error = "You do not have those cards";
+            sendSpecific(game.players.get(game.currentTurn).getPlayerID(), g);
             System.out.println("invalid");
         }
 
-        System.out.println(m.getCard()+" "+m.getSuite());
 
     }
+
     @MessageMapping("/draw")
     public void draw() throws Exception {
-        if(game.canDraw()){
-            if(Objects.equals(game.getCardRank(game.topCard), "2")){
-                ArrayList<String> drew=game.drawtwo();
+        Greeting g = new Greeting();
+        if (game.canDraw()) {
+
+            if (Objects.equals(game.getCardRank(game.topCard), "2")) {
+                ArrayList<String> drew = game.drawtwo();
+                String card = drew.stream().map(Object::toString)
+                        .collect(Collectors.joining(","));
+                game.players.get(game.currentTurn).drew = card;
+                game.addToPlayerHand(game.currentTurn, card);
                 for (String s : drew) {
                     if (game.canPlay(s)) {
                         HelloMessage m = new HelloMessage();
