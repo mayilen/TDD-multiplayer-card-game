@@ -88,9 +88,13 @@ public class Game {
 
        if(Objects.equals(getCardRank(topCard), "2")){
 
-           if (cards.length==1&&!drew2) {
+           if (cards.length!=plus2Count*2&&!drew2) {
                return false;
            }else if(cards.length!=1&&drew2){
+               return false;
+           }
+           HashSet<String> temp=new HashSet<>(List.of(cards));
+           if(temp.size()!=cards.length){
                return false;
            }
            for(int i=0;i<cards.length;i++){
