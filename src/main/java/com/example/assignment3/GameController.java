@@ -88,24 +88,47 @@ public class GameController {
                 game.addToPlayerHand(game.currentTurn, card);
                 for (String s : drew) {
                     if (game.canPlay(s)) {
+
                         HelloMessage m = new HelloMessage();
                         m.card = s;
-                        play(m);
+                        if(Objects.equals(game.getCardRank(s), "8")){
+                            g.suite=true;
+                            g.cardToPlay=s;
+                            g.drew=game.players.get(game.currentTurn).drew;
+                            sendSpecific(game.players.get(game.currentTurn).getPlayerID(), g);
+                        }else{
+
+                        play(m);}
                         return;
                     }
                 }
             }
-                for(int i=0;i<3;i++){
-                    if(game.canDraw()){
-                        String card=game.drawCard();
-                        if(game.canPlay(card)){
-                            HelloMessage m = new HelloMessage();
-                            m.card = card;
-                            play(m);
-                            return;
-                        }
+            for (int i = 0; i < 3; i++) {
+                if (game.canDraw()) {
+                    String card = game.drawCard();
+                    simpMessagingTemplate.convertAndSend("/topic/deck", new Message("" + game.getDeckSize()));
+                    if (game.players.get(game.currentTurn).drew.isBlank()) {
+                        game.players.get(game.currentTurn).drew += card;
+                    } else {
+                        game.players.get(game.currentTurn).drew += ", " + card;
+                    }
+                    game.addToPlayerHand(game.currentTurn, card);
+                    if (game.canPlay(card)) {
+                        game.players.get(game.currentTurn).drew += " & played " + card;
+                        HelloMessage m = new HelloMessage();
+                        m.card = card;
+                        if(Objects.equals(game.getCardRank(card), "8")){
+                            g.suite=true;
+                            g.cardToPlay=card;
+                            g.drew=game.players.get(game.currentTurn).drew;
+                            sendSpecific(game.players.get(game.currentTurn).getPlayerID(), g);
+                        }else{
+
+                            play(m);}
+                        return;
                     }
                 }
+            }
 
 
         }
