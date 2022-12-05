@@ -143,7 +143,11 @@ public class Game {
         return c.substring(1);
     }
     public String getCardRank(String c){
-        return String.valueOf(c.charAt(0));
+        if(c.length()==2) {
+            return String.valueOf(c.charAt(0));
+        }else{
+            return "10";
+        }
     }
     public String playCard(String c){
         String[] cards= c.split(",");
