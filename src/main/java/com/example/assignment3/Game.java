@@ -183,6 +183,17 @@ public class Game {
         String[] cards= c.split(",");
         return (players.get(p).cards.containsAll(List.of(cards)));
     }
+    public void newRound(){
+        deckInitializer();
+        direction=1;
+        skippedIndex=-1;
+        for (Player p: players) {
+            p.cards=dealHand();
+            p.canPlay=true;
+            p.skipped=false;
+            p.drew="";
+        }
+    }
     public boolean canPlayerPlay(int p){
         if(deck.size()>1){
             return true;
