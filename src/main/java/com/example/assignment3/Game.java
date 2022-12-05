@@ -11,7 +11,7 @@ public class Game {
         deckInitializer();
     }
     public int direction=1;
-    public int skippedIndex;
+    public int skippedIndex=-1;
     public int currentTurn=0;
     public int startRoundIndex=0;
     public int plus2Count=1;
