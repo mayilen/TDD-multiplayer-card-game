@@ -165,6 +165,30 @@ public class GameController {
         System.out.println("p is: " + p);
         if (game.skippedIndex != -1) {
             game.players.get(game.skippedIndex).skipped = true;
+        }
+        for (int i = 0; i < game.players.size(); i++) {
+            if (i != p) {
+                Greeting g = new Greeting();
+                g.player = i + 1;
+                g.card = game.players.get(i).cards.toString();
+                g.drew = game.players.get(i).drew;
+                g.skipped = game.players.get(i).skipped;
+                g.playerTurn = "Player " + (p + 1) + "'s Turn";
+                sendSpecific(game.players.get(i).getPlayerID(), g);
+                game.players.get(i).drew = "";
+                game.players.get(i).skipped = false;
+                game.skippedIndex = -1;
+            } else {
+                Greeting g = new Greeting();
+                g.player = i + 1;
+                g.card = game.players.get(i).cards.toString();
+                g.drew = game.players.get(i).drew;
+                g.skipped = game.players.get(i).skipped;
+                g.playerTurn = "Your Turn";
+                sendSpecific(game.players.get(i).getPlayerID(), g);
+                game.players.get(i).drew = "";
+                game.players.get(i).skipped = false;
+                game.skippedIndex = -1;
             }
         }
     }
