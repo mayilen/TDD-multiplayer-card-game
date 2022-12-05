@@ -130,24 +130,41 @@ public class GameController {
                 }
             }
 
-
+            playerTurn(game.nextTurn());
         }
     }
-    public void playerTurn(int p) throws Exception {
-        for(int i=0;i<game.players.size();i++){
-            if(i!=p){
-                Greeting g=new Greeting();
-                g.player=i+1;
-                g.card=game.players.get(i).cards.toString();
-                g.playerTurn="Player "+(p+1)+"'s Turn";
-                sendSpecific(game.players.get(i).getPlayerID(),g);
-            }else{
-                Greeting g=new Greeting();
-                g.player=i+1;
-                g.card=game.players.get(i).cards.toString();
-                g.playerTurn="Your Turn";
-                sendSpecific(game.players.get(i).getPlayerID(),g);
 
+    public void newRound() throws Exception {
+        game.newRound();
+        playerTurn(game.nextRound());
+        simpMessagingTemplate.convertAndSend("/topic/deck", new Message("" + game.getDeckSize()));
+        simpMessagingTemplate.convertAndSend("/topic/topcard", new Message(game.intializeTopCard()));
+
+    }
+
+    public void playerTurn(int p) throws Exception {
+        String direction;
+        if (game.isGameDone()) {
+            game.calcScores();
+            simpMessagingTemplate.convertAndSend("/topic/winner", new Message("Game Ended"));
+            sendScores();
+            newRound();
+            return;
+        }
+        if (!game.canPlayerPlay(p)) {
+            game.players.get(p).canPlay = false;
+            playerTurn(game.nextTurn());
+            return;
+        }
+        if (game.direction == 1) {
+            direction = "To the right";
+        } else {
+            direction = "To the Left";
+        }
+        simpMessagingTemplate.convertAndSend("/topic/direction", new Message(direction));
+        System.out.println("p is: " + p);
+        if (game.skippedIndex != -1) {
+            game.players.get(game.skippedIndex).skipped = true;
             }
         }
     }
