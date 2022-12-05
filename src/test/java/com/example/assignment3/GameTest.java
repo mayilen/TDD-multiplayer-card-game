@@ -117,7 +117,18 @@ public class GameTest {
         game.playCard("2D");
         assertFalse(game.drew2);
         assertFalse(game.canPlay("2S"));
+       // game.playCard("1D");
+        assertEquals(1,game.currentTurn);
+        assertEquals(-1,game.direction);
+        assertEquals(0,game.nextTurn());
+        game.playCard("3D");
+        assertEquals(-1,game.direction);
+        assertEquals(3,game.nextTurn());
+        assertEquals(2,game.nextTurn());
+        assertEquals(1,game.nextTurn());
+        assertEquals(0,game.nextTurn());
     }
+
     @Test
     public void maxPlayer() {
         game = new Game();
@@ -183,6 +194,7 @@ public class GameTest {
        assertEquals(1,game.nextTurn());
        assertEquals(2,game.nextTurn());
        assertEquals(3,game.nextTurn());
+
    }
     @Test
     public void skippedIndex(){
