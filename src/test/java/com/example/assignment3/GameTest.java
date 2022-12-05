@@ -178,6 +178,21 @@ public class GameTest {
         assertFalse(game.canDraw());
     }
     @Test
+    public void testtwos(){
+        game=new Game();
+        game.topCard="3H";
+        game.playCard("2D");
+        assertEquals(1,game.plus2Count);
+        assertFalse(game.drew2);
+        game.playCard("2S,4S");
+        assertEquals(1,game.plus2Count);
+        game.playCard("2S");
+        game.drew2=true;
+        game.playCard("2S");
+        assertEquals(2,game.plus2Count);
+        assertEquals(4,game.drawtwo().size());
+    }
+    @Test
     public void canPlayTest(){
         game=new Game();
         game.topCard="7H";
