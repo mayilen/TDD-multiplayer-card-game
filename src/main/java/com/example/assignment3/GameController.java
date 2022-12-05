@@ -43,20 +43,29 @@ public class GameController {
         if (game.cardsExist(playerIndex, m.getCard())) {
             if (game.canPlay(m.getCard())) {
                 game.playCard(m.getCard());
-                simpMessagingTemplate.convertAndSend("/topic/topcard",new Message(game.topCard));
-                game.removeFromPlayerHand(game.currentTurn,m.getCard());
-                if(m.getSuite()!=null) {
+                game.removeFromPlayerHand(playerIndex, m.getCard());
+                if (m.getSuite() != null) {
                     game.changeSuit(m.getSuite());
                 }
-                g.card=game.players.get(game.currentTurn).cards.toString();
-                sendSpecific(game.players.get(game.currentTurn).getPlayerID(),g);
+                simpMessagingTemplate.convertAndSend("/topic/topcard", new Message(game.topCard));
+                System.out.println("Diretion " + game.direction);
+                if (game.players.get(playerIndex).hasWon()) {
+                    game.calcScores();
+                    simpMessagingTemplate.convertAndSend("/topic/winner", new Message("Player" + (playerIndex + 1 )+ " has Won!"));
+                    sendScores();
+                    newRound();
+                }
+                System.out.println("new top card is: " + game.topCard);
+
                 playerTurn(game.nextTurn());
-            }else{
-                g.error="Invalid Input";
-                sendSpecific(game.players.get(game.currentTurn).getPlayerID(),g);
+                System.out.println("Diretion after nextTurn " + game.direction);
+
+            } else {
+                g.error = "Invalid Input";
+                sendSpecific(game.players.get(game.currentTurn).getPlayerID(), g);
             }
 
-        }else{
+        } else {
 
             g.error="You do not have those cards";
             sendSpecific(game.players.get(game.currentTurn).getPlayerID(),g);
