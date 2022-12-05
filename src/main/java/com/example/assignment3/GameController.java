@@ -192,6 +192,7 @@ public class GameController {
             }
         }
     }
+
     @MessageMapping("/hello")
     @SendTo("/topic/greetings")
     public int greet(HelloMessage m) throws Exception {
@@ -199,24 +200,25 @@ public class GameController {
 
         game.players.add(new Player(m.getId()));
 
-        if(game.players.size()>3){
-            game.setMaxPlayer(4);
-            game.players.get(0).cards=game.dealHand();
-            game.players.get(1).cards=game.dealHand();
-            game.players.get(2).cards=game.dealHand();
-            game.players.get(3).cards=game.dealHand();
-            System.out.println("sfgsdfg");
+        if (game.players.size() > 3) {
+            game.setMaxPlayer(3);
+            game.players.get(0).cards = game.dealHand();
+            game.players.get(1).cards = game.dealHand();
+            game.players.get(2).cards = game.dealHand();
+            game.players.get(3).cards = game.dealHand();
+
             playerTurn(game.currentTurn);
-            simpMessagingTemplate.convertAndSend("/topic/deck",new Message(""+game.getDeckSize()));
-            simpMessagingTemplate.convertAndSend("/topic/scores",sendScores());
-         simpMessagingTemplate.convertAndSend("/topic/topcard", new Message( game.intializeTopCard()));
+            simpMessagingTemplate.convertAndSend("/topic/deck", new Message("" + game.getDeckSize()));
+            sendScores();
+            game.nextRound();
+            simpMessagingTemplate.convertAndSend("/topic/topcard", new Message(game.intializeTopCard()));
         }
         return game.players.size();
     }
+
     @MessageMapping("/room")
-    public void sendSpecific(@DestinationVariable int id,Greeting msg) throws Exception {
-        System.out.println(id);
+    public void sendSpecific(@DestinationVariable int id, Greeting msg) throws Exception {
         System.out.println(msg);
-        simpMessagingTemplate.convertAndSend( "/user/queue/hand/"+id, msg);
+        simpMessagingTemplate.convertAndSend("/user/queue/hand/" + id, msg);
     }
 }
