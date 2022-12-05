@@ -213,6 +213,14 @@ public class GameTest {
         assertEquals(2,game.nextTurn());
     }
     @Test
+    public void newRound(){
+        Game game=new Game();
+        game.players.add(new Player(1));
+        game.players.get(0).canPlay=false;
+        game.newRound();
+        assertTrue(game.players.get(0).canPlay);
+    }
+    @Test
     public void isGameDone(){
         Game game=new Game();
         game.players.add(new Player(1));
