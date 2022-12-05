@@ -16,6 +16,24 @@ public class PlayerTest {
         assertEquals(1,player.getPlayerID());
     }
     @Test
+    public void playerskipped(){
+        Game game=new Game();
+        player = new Player(1);
+        player.skipped=true;
+        assertTrue(player.skipped);
+        player.skipped=false;
+        assertFalse(player.skipped);
+    }
+    @Test
+    public void playersCanPlay(){
+        Game game=new Game();
+        player = new Player(1);
+        player.canPlay=true;
+        assertTrue(player.canPlay);
+        player.canPlay=false;
+        assertFalse(player.canPlay);
+    }
+    @Test
     public void dealHand()
     {
         Game game=new Game();
