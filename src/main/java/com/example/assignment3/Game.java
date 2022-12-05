@@ -140,7 +140,7 @@ public class Game {
         return drew;
     }
     public String getCardSuit(String c){
-        return c.substring(1);
+        return c.substring(c.length()-1);
     }
     public String getCardRank(String c){
         if(c.length()==2) {
