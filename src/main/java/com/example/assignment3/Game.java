@@ -76,6 +76,11 @@ public class Game {
         int round=startRoundIndex++;
         return round%4;
     }
+    public void calcScores(){
+        for (Player p:players ) {
+            p.scoreCalc();
+        }
+    }
     public boolean canPlay(String c1){
 
        String[] cards= c1.split(",");
