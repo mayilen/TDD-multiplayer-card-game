@@ -119,6 +119,7 @@ public class GameTest {
         game.playCard("2D");
         assertFalse(game.drew2);
         assertFalse(game.canPlay("2S"));
+        assertFalse(game.canPlay("8S,1D"));
        // game.playCard("1D");
         assertEquals(1,game.currentTurn);
         assertEquals(-1,game.direction);
@@ -186,6 +187,8 @@ public class GameTest {
         game.topCard="2D";
         assertFalse(game.canPlay("2S"));
         assertTrue(game.canPlay("7D,3D"));
+        assertFalse(game.canPlay("7D,3D,9D"));
+        assertFalse(game.canPlay("7D,7D"));
         game.drew2=true;
         assertTrue(game.canPlay("7D"));
         assertFalse(game.canPlay("2D,7D"));
