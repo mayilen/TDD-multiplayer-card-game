@@ -12,7 +12,7 @@ public class HelloMessage {
     private int id;
     public String card;
     public String suite;
-
+    public String drew;
 
 
     @Override

@@ -43,6 +43,16 @@ function connect() {
         topCard(JSON.parse(greeting.body))
 
     });
+     stompClient.subscribe('/topic/direction', function (greeting) {
+        console.log("direction is "+greeting)
+        direction(JSON.parse(greeting.body))
+
+        });
+         stompClient.subscribe('/topic/winner', function (greeting) {
+                console.log("direction is "+greeting)
+                winner(JSON.parse(greeting.body))
+
+                });
  stompClient.subscribe('/user/queue/hand/'
               + id, function (msgOut) {
               console.log("msg: "+JSON.parse(msgOut.body))
@@ -59,6 +69,7 @@ function connect() {
      }, 1000);
 
 }
+
 function deck({message}){
 $("#deck").html(message)
 console.log(message)
@@ -82,6 +93,14 @@ function showGreeting(message) {
 
 
 }
+function winner({message}){
+
+ alert(message);
+}
+function direction({message}){
+
+ $("#direction").html(message);
+}
 function topCard({message}){
 
  $("#topCard").html(message);
@@ -89,6 +108,12 @@ function topCard({message}){
 function setPlayerNum(num){
 console.log(num);
     $("#playerID").html(num);
+}
+function change(){
+ let suite=$( "#suite2").val()
+ $("#changesuite").hide()
+    stompClient.send("/app/change", {}, JSON.stringify({'card':cardtoplay,'suite':suite}));
+
 }
 function play(){
 let cards=$( "#card").val();
@@ -106,12 +131,26 @@ let cards=$( "#card").val();
 function draw(){
 stompClient.send("/app/draw", {})
 }
-function showHand({player,card,playerTurn,error}) {
+let cardtoplay;
+function showHand({player,card,playerTurn,error,drew,skipped,suite,cardToPlay}) {
 console.log("hand is "+card);
+    if(suite){
+       $("#changesuite").show()
+       $("#play").hide()
+        cardtoplay=cardToPlay;
+    }
     if(player!=0)
     setPlayerNum(player)
     if(card!=null)
     $("#hand").html(card);
+    if(drew!=null){
+    $("#drew").html(drew);
+    }
+    if(skipped==true){
+     $("#skipped").html("Your Turn was skipped");
+    }else{
+     $("#skipped").html();
+    }
 if(playerTurn!=null){
 $("#turn").html(playerTurn);
 if(playerTurn=="Your Turn"){
@@ -140,6 +179,7 @@ $(function () {
             $( "#suite").prop("hidden",true)
     }
     })
+    $("#change").click(function(){change();})
     $("#draw").click(function(){draw();})
     $( "#disconnect" ).click(function() { disconnect(); });
     $( "#send" ).click(function() { play(); });
