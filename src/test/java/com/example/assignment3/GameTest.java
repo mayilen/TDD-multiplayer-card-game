@@ -92,6 +92,8 @@ public class GameTest {
     public void getCardRank(){
         game=new Game();
         assertEquals("7",game.getCardRank("7S"));
+        assertEquals("10",game.getCardRank("10S"));
+
     }
     @Test
     public void dealCards(){
