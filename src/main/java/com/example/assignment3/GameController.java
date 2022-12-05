@@ -8,29 +8,40 @@ import org.springframework.messaging.simp.SimpMessagingTemplate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 @Controller
 public class GameController {
     @Autowired
     private SimpMessagingTemplate simpMessagingTemplate;
 
-    public Game game=new Game();
+    public Game game = new Game();
 
-    public String sendScores(){
-        ArrayList<Integer> scores=new ArrayList<Integer>();
-        for (Player p:
-             game.players) {
+    public String sendScores() {
+        ArrayList<Integer> scores = new ArrayList<Integer>();
+        for (Player p :
+                game.players) {
             scores.add(p.score);
         }
+        simpMessagingTemplate.convertAndSend("/topic/scores", scores.toString());
+
         return scores.toString();
-           }
+    }
+    @MessageMapping("/change")
+    public void changeSuite(HelloMessage m) throws Exception {
+        System.out.println(m.card);
+        System.out.println(m.suite);
+        play(m);
+    }
     @MessageMapping("/play")
     //@SendTo("/topic/greetings")
-    public void play(HelloMessage m) throws Exception{
-        System.out.println(m.getCard());
-        Greeting g=new Greeting();
-        if(game.cardsExist(game.currentTurn,m.getCard())){
-            if(game.canPlay(m.getCard())){
+    public void play(HelloMessage m) throws Exception {
+        System.out.println("card to play: "+m.getCard());
+        System.out.println("top card is: " + game.topCard);
+        Greeting g = new Greeting();
+        int playerIndex = game.currentTurn;
+        if (game.cardsExist(playerIndex, m.getCard())) {
+            if (game.canPlay(m.getCard())) {
                 game.playCard(m.getCard());
                 simpMessagingTemplate.convertAndSend("/topic/topcard",new Message(game.topCard));
                 game.removeFromPlayerHand(game.currentTurn,m.getCard());
