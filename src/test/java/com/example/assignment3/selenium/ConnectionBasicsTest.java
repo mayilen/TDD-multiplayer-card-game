@@ -276,6 +276,7 @@ public class ConnectionBasicsTest extends AbstractSeleniumTest {
         GameController.game.topCard = "KC";
         GameController.game.players.get(0).setHand("KH,2H");
         p1.findElement(By.id("refresh")).click();
+        assertEquals("KC",p1.findElement(By.id("topCard")).getText());
         assertEquals("[KH, 2H]",p1.findElement(By.id("hand")).getText());
         p1.findElement(By.id("card")).sendKeys("KH");
         p1.findElement(By.id("send")).click();
@@ -300,6 +301,8 @@ public class ConnectionBasicsTest extends AbstractSeleniumTest {
         GameController.game.topCard = "KC";
         GameController.game.players.get(0).setHand("7C,2H");
         p1.findElement(By.id("refresh")).click();
+
+        assertEquals("KC",p1.findElement(By.id("topCard")).getText());
         assertEquals("[7C, 2H]",p1.findElement(By.id("hand")).getText());
         p1.findElement(By.id("card")).sendKeys("7C");
         p1.findElement(By.id("send")).click();
@@ -324,6 +327,7 @@ public class ConnectionBasicsTest extends AbstractSeleniumTest {
         GameController.game.topCard = "KC";
         GameController.game.players.get(0).setHand("8H,2H");
         p1.findElement(By.id("refresh")).click();
+        assertEquals("KC",p1.findElement(By.id("topCard")).getText());
         assertEquals("[8H, 2H]",p1.findElement(By.id("hand")).getText());
         p1.findElement(By.id("card")).sendKeys("8H");
         assertTrue(p1.findElement(By.id("suite")).isDisplayed());
@@ -347,6 +351,7 @@ public class ConnectionBasicsTest extends AbstractSeleniumTest {
         GameController.game.topCard = "KC";
         GameController.game.players.get(0).setHand("5S,2H");
         p1.findElement(By.id("refresh")).click();
+        assertEquals("KC",p1.findElement(By.id("topCard")).getText());
         assertEquals("[5S, 2H]",p1.findElement(By.id("hand")).getText());
         p1.findElement(By.id("card")).sendKeys("5S");
         p1.findElement(By.id("send")).click();
@@ -356,4 +361,33 @@ public class ConnectionBasicsTest extends AbstractSeleniumTest {
         p3.quit();
         p4.quit();
     }
+    @Test
+    public void TestRow58() throws Exception {
+        //this.indexPage.connect();
+        GameController.game.restart();
+        GameController.game.players.clear();
+        final WebDriver p1 = this.quickConnectSecondUser();
+        final WebDriver p2 = this.quickConnectSecondUser();
+        final WebDriver p3 = this.quickConnectSecondUser();
+        final WebDriver p4 = this.quickConnectSecondUser();
+
+        this.waitForDisplayed(p1.findElement(By.id("play")));
+        GameController.game.topCard = "7C";
+        GameController.game.players.get(0).setHand("3H");
+        GameController.game.deck.clear();
+        GameController.game.deck.add("2C");
+        GameController.game.deck.add("6C");
+        p1.findElement(By.id("refresh")).click();
+        assertEquals("7C",p1.findElement(By.id("topCard")).getText());
+        assertEquals("[3H]",p1.findElement(By.id("hand")).getText());
+        p1.findElement(By.id("draw")).click();
+        assertEquals("[3H]",p1.findElement(By.id("hand")).getText());
+        assertEquals("6C",p1.findElement(By.id("topCard")).getText());
+        assertEquals("6C & played 6C",p1.findElement(By.id("drew")).getText());
+        p1.quit();
+        p2.quit();
+        p3.quit();
+        p4.quit();
+    }
+    
 }
