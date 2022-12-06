@@ -161,9 +161,9 @@ public class GameController {
             return;
         }
         if (game.direction == 1) {
-            direction = "To the right";
-        } else {
             direction = "To the Left";
+        } else {
+            direction = "To the Right";
         }
         simpMessagingTemplate.convertAndSend("/topic/direction", new Message(direction));
         System.out.println("p is: " + p);

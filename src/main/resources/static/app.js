@@ -129,7 +129,7 @@ let cards=$( "#card").val();
      stompClient.send("/app/play", {}, JSON.stringify({'card':cards}));
      console.log( $( "#card").val());
     }
-
+    $( "#card").val("");
 }
 function draw(){
 stompClient.send("/app/draw", {})
