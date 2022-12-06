@@ -115,6 +115,9 @@ function change(){
     stompClient.send("/app/change", {}, JSON.stringify({'card':cardtoplay,'suite':suite}));
 
 }
+function refresh(){
+ stompClient.send("/app/refresh", {},)
+}
 function play(){
 let cards=$( "#card").val();
     if($( "#suite").is(':visible')){
@@ -179,8 +182,10 @@ $(function () {
             $( "#suite").prop("hidden",true)
     }
     })
+
     $("#change").click(function(){change();})
     $("#draw").click(function(){draw();})
     $( "#disconnect" ).click(function() { disconnect(); });
     $( "#send" ).click(function() { play(); });
+     $( "#refresh" ).click(function() { refresh(); });
 });
