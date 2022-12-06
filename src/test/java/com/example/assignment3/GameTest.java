@@ -29,6 +29,15 @@ public class GameTest {
         assertEquals(13,game.rank.size());
     }
     @Test
+    public void restart(){
+        game = new Game();
+        game.players.add(new Player(1));
+        assertEquals(1,game.players.size());
+        game.restart();
+        assertEquals(0,game.players.size());
+    
+    }
+    @Test
     public void intializeTopCard(){
         game = new Game();
         game.deck= new ArrayList<>();
