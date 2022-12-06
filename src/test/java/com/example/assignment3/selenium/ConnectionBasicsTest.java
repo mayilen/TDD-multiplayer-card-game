@@ -262,4 +262,52 @@ public class ConnectionBasicsTest extends AbstractSeleniumTest {
         p3.quit();
         p4.quit();
     }
+    @Test
+    public void TestRow51() throws Exception {
+        //this.indexPage.connect();
+        GameController.game.restart();
+        GameController.game.players.clear();
+        final WebDriver p1 = this.quickConnectSecondUser();
+        final WebDriver p2 = this.quickConnectSecondUser();
+        final WebDriver p3 = this.quickConnectSecondUser();
+        final WebDriver p4 = this.quickConnectSecondUser();
+
+        this.waitForDisplayed(p1.findElement(By.id("play")));
+        GameController.game.topCard = "KC";
+        GameController.game.players.get(0).setHand("KH,2H");
+        p1.findElement(By.id("refresh")).click();
+        assertEquals("[KH, 2H]",p1.findElement(By.id("hand")).getText());
+        p1.findElement(By.id("card")).sendKeys("KH");
+        p1.findElement(By.id("send")).click();
+        assertEquals("KH",p2.findElement(By.id("topCard")).getText());
+
+        p1.quit();
+        p2.quit();
+        p3.quit();
+        p4.quit();
+    }
+    @Test
+    public void TestRow52() throws Exception {
+        //this.indexPage.connect();
+        GameController.game.restart();
+        GameController.game.players.clear();
+        final WebDriver p1 = this.quickConnectSecondUser();
+        final WebDriver p2 = this.quickConnectSecondUser();
+        final WebDriver p3 = this.quickConnectSecondUser();
+        final WebDriver p4 = this.quickConnectSecondUser();
+
+        this.waitForDisplayed(p1.findElement(By.id("play")));
+        GameController.game.topCard = "KC";
+        GameController.game.players.get(0).setHand("7C,2H");
+        p1.findElement(By.id("refresh")).click();
+        assertEquals("[7C, 2H]",p1.findElement(By.id("hand")).getText());
+        p1.findElement(By.id("card")).sendKeys("7C");
+        p1.findElement(By.id("send")).click();
+        assertEquals("7C",p2.findElement(By.id("topCard")).getText());
+
+        p1.quit();
+        p2.quit();
+        p3.quit();
+        p4.quit();
+    }
 }
