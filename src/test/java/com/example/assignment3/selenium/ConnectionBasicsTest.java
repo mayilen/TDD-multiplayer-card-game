@@ -6,6 +6,7 @@ import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.springframework.stereotype.Controller;
 
 import java.util.List;
 import java.util.Objects;
@@ -32,7 +33,7 @@ public class ConnectionBasicsTest extends AbstractSeleniumTest {
         final WebDriver p3 = this.quickConnectSecondUser();
         final WebDriver p4 = this.quickConnectSecondUser();
         this.waitForDisplayed(p1.findElement(By.id("play")));
-       // assertTrue(this.indexPage.showsGame());
+        // assertTrue(this.indexPage.showsGame());
         assertNotEquals("", p1.findElement(By.id("hand")).getText());
         GameController.game.restart();
         p1.quit();
@@ -40,8 +41,9 @@ public class ConnectionBasicsTest extends AbstractSeleniumTest {
         p3.quit();
         p4.quit();
     }
+
     @Test
-    public void TestRo41() {
+    public void TestRow42() throws Exception {
         //this.indexPage.connect();
         GameController.game.restart();
         GameController.game.players.clear();
@@ -51,15 +53,52 @@ public class ConnectionBasicsTest extends AbstractSeleniumTest {
         final WebDriver p4 = this.quickConnectSecondUser();
 
         this.waitForDisplayed(p1.findElement(By.id("play")));
-        GameController.game.topCard="5C";
-        GameController.game.players.get(0).setHand("3C,2H");
+        GameController.game.topCard = "7H";
+        GameController.game.players.get(0).setHand("1H,2H");
+        GameController.game.players.get(3).setHand("7H,9S");
         // assertTrue(this.indexPage.showsGame());
-        p1.findElement(By.id("card")).sendKeys("3C");
+        p1.findElement(By.id("refresh")).click();
+        assertEquals("[1H, 2H]",p1.findElement(By.id("hand")).getText());
+        p1.findElement(By.id("card")).sendKeys("1H");
+        assertEquals("To the right",p1.findElement(By.id("direction")).getText());
         p1.findElement(By.id("send")).click();
+        assertEquals("To the Left",p1.findElement(By.id("direction")).getText());
+        assertEquals("1H",p4.findElement(By.id("topCard")).getText());
+        p4.findElement(By.id("card")).sendKeys("7H");
+        p4.findElement(By.id("send")).click();
+        assertEquals("7H",p4.findElement(By.id("topCard")).getText());
+        assertEquals("Player 3's Turn", p4.findElement(By.id("turn")).getText());
+        assertTrue(p3.findElement(By.id("play")).isDisplayed());
 
-        assertEquals(1,GameController.game.currentTurn);
-       assertEquals(4, GameController.game.players.size());
+        assertEquals(2, GameController.game.currentTurn);
+        p1.quit();
+        p2.quit();
+        p3.quit();
+        p4.quit();
+    }
+    @Test
+    public void TestRow44() throws Exception {
+        //this.indexPage.connect();
+        GameController.game.restart();
+        GameController.game.players.clear();
+        final WebDriver p1 = this.quickConnectSecondUser();
+        final WebDriver p2 = this.quickConnectSecondUser();
+        final WebDriver p3 = this.quickConnectSecondUser();
+        final WebDriver p4 = this.quickConnectSecondUser();
 
+        this.waitForDisplayed(p1.findElement(By.id("play")));
+        GameController.game.topCard = "7C";
+        GameController.game.players.get(0).setHand("QC,2H");
+        p1.findElement(By.id("refresh")).click();
+        assertEquals("[QC, 2H]",p1.findElement(By.id("hand")).getText());
+        p1.findElement(By.id("card")).sendKeys("QC");
+        p1.findElement(By.id("send")).click();
+        assertEquals("QC",p4.findElement(By.id("topCard")).getText());
+        assertEquals("Your Turn was skipped",p2.findElement(By.id("skipped")).getText());
+        assertEquals("Player 3's Turn", p4.findElement(By.id("turn")).getText());
+        assertTrue(p3.findElement(By.id("play")).isDisplayed());
+
+        assertEquals(2, GameController.game.currentTurn);
         p1.quit();
         p2.quit();
         p3.quit();
