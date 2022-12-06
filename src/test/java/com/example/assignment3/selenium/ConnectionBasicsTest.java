@@ -221,5 +221,45 @@ public class ConnectionBasicsTest extends AbstractSeleniumTest {
         p3.quit();
         p4.quit();
     }
+    @Test
+    public void TestRow48() throws Exception {
+        //this.indexPage.connect();
+        GameController.game.restart();
+        GameController.game.players.clear();
+        final WebDriver p1 = this.quickConnectSecondUser();
+        final WebDriver p2 = this.quickConnectSecondUser();
+        final WebDriver p3 = this.quickConnectSecondUser();
+        final WebDriver p4 = this.quickConnectSecondUser();
 
+        this.waitForDisplayed(p1.findElement(By.id("play")));
+        GameController.game.topCard = "7C";
+        GameController.game.players.get(0).setHand("4C,2H");
+        GameController.game.players.get(1).setHand("5C,2H");
+        GameController.game.players.get(2).setHand("6C,7H,4D");
+        GameController.game.players.get(3).setHand("QC,2H");
+        p1.findElement(By.id("refresh")).click();
+        assertEquals("[4C, 2H]",p1.findElement(By.id("hand")).getText());
+        p1.findElement(By.id("card")).sendKeys("4C");
+        p1.findElement(By.id("send")).click();
+        p2.findElement(By.id("card")).sendKeys("5C");
+        p2.findElement(By.id("send")).click();
+        p3.findElement(By.id("card")).sendKeys("6C");
+        p3.findElement(By.id("send")).click();
+        assertEquals("[QC, 2H]",p4.findElement(By.id("hand")).getText());
+        assertEquals("Player 4's Turn", p1.findElement(By.id("turn")).getText());
+        assertEquals(3, GameController.game.currentTurn);
+        p4.findElement(By.id("card")).sendKeys("QC");
+        p4.findElement(By.id("send")).click();
+        assertEquals("Your Turn was skipped",p1.findElement(By.id("skipped")).getText());
+        assertEquals(1, GameController.game.currentTurn);
+        assertEquals("Your Turn", p2.findElement(By.id("turn")).getText());
+        assertEquals("Player 2's Turn", p1.findElement(By.id("turn")).getText());
+        assertTrue(p2.findElement(By.id("play")).isDisplayed());
+        assertEquals(1, GameController.game.currentTurn);
+
+        p1.quit();
+        p2.quit();
+        p3.quit();
+        p4.quit();
+    }
 }
