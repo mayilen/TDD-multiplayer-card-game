@@ -17,7 +17,7 @@ public class GameController {
 
     public static Game game = new Game();
 
-    public String sendScores() {
+    public  String sendScores() {
         ArrayList<Integer> scores = new ArrayList<Integer>();
         for (Player p :
                 game.players) {
@@ -32,6 +32,10 @@ public class GameController {
         System.out.println(m.card);
         System.out.println(m.suite);
         play(m);
+    }
+    @MessageMapping("/refresh")
+    public void refresh() throws Exception {
+        playerTurn(game.currentTurn);
     }
     @MessageMapping("/play")
     //@SendTo("/topic/greetings")
@@ -134,7 +138,7 @@ public class GameController {
         }
     }
 
-    public void newRound() throws Exception {
+    public  void newRound() throws Exception {
         game.newRound();
         playerTurn(game.nextRound());
         simpMessagingTemplate.convertAndSend("/topic/deck", new Message("" + game.getDeckSize()));
@@ -142,7 +146,7 @@ public class GameController {
 
     }
 
-    public void playerTurn(int p) throws Exception {
+    public  void  playerTurn(int p) throws Exception {
         String direction;
         if (game.isGameDone()) {
             game.calcScores();
@@ -218,7 +222,7 @@ public class GameController {
     }
 
     @MessageMapping("/room")
-    public void sendSpecific(@DestinationVariable int id, Greeting msg) throws Exception {
+    public  void sendSpecific(@DestinationVariable int id, Greeting msg) throws Exception {
         System.out.println(msg);
         simpMessagingTemplate.convertAndSend("/user/queue/hand/" + id, msg);
     }
