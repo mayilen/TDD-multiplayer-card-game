@@ -44,7 +44,7 @@ public class Game {
         startRoundIndex=0;
        plus2Count=1;
         drew2=false;
-        //deck.clear();
+        deckInitializer();
     }
     public int incrementPlus2(String c){
         if(Objects.equals(getCardRank(topCard), "2") && Objects.equals(getCardRank(c), "2")){

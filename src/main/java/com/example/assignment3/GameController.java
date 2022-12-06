@@ -15,7 +15,7 @@ public class GameController {
     @Autowired
     private SimpMessagingTemplate simpMessagingTemplate;
 
-    public Game game = new Game();
+    public static Game game = new Game();
 
     public String sendScores() {
         ArrayList<Integer> scores = new ArrayList<Integer>();
@@ -201,6 +201,7 @@ public class GameController {
         game.players.add(new Player(m.getId()));
 
         if (game.players.size() > 3) {
+           // game.deckInitializer();
             game.setMaxPlayer(3);
             game.players.get(0).cards = game.dealHand();
             game.players.get(1).cards = game.dealHand();
