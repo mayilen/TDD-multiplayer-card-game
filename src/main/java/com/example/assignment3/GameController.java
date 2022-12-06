@@ -36,6 +36,7 @@ public class GameController {
     @MessageMapping("/refresh")
     public void refresh() throws Exception {
         playerTurn(game.currentTurn);
+        simpMessagingTemplate.convertAndSend("/topic/topcard", new Message(game.topCard));
     }
     @MessageMapping("/play")
     //@SendTo("/topic/greetings")
