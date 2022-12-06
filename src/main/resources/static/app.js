@@ -163,7 +163,9 @@ if(playerTurn=="Your Turn"){
 }
 }
 if(error!=null){
-    alert(error)
+    $("#error").html(error)
+    }else{
+     $("#error").val("")
     }
 
 }
