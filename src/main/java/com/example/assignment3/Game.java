@@ -34,8 +34,16 @@ public class Game {
             deck.add( (int)(Math.random()*deck.size()),drawcard);
             drawcard=drawCard();
         }
-        playCard(drawcard);
+        topCard=drawcard;
         return topCard;
+    }
+    public void restart(){
+        players.clear();
+        currentTurn=0;
+        startRoundIndex=0;
+       plus2Count=1;
+        drew2=false;
+        //deck.clear();
     }
     public int incrementPlus2(String c){
         if(Objects.equals(getCardRank(topCard), "2") && Objects.equals(getCardRank(c), "2")){
