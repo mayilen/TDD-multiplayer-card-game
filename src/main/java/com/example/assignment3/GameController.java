@@ -134,7 +134,7 @@ public class GameController {
                     }
                 }
             }
-
+            game.players.get(game.currentTurn).drew +=" & can't play";
             playerTurn(game.nextTurn());
         }
     }
