@@ -11,6 +11,7 @@ public class Game {
         deckInitializer();
     }
     public int direction=1;
+    public int skippedIndex=-1;
     public int currentTurn=0;
     public int startRoundIndex=0;
     public int plus2Count=1;
@@ -64,16 +65,29 @@ public class Game {
         }else{
             currentTurn--;
         }
-        if(currentTurn>maxPlayer){
+        if(currentTurn>3){
             currentTurn=0;
         } else if (currentTurn<0) {
-            currentTurn=maxPlayer;
+            currentTurn=3;
         }
         return currentTurn;
+    }
+    public boolean isGameDone(){
+        for(int i=0;i<players.size();i++){
+            if(players.get(i).canPlay){
+                return false;
+            }
+        }
+        return true;
     }
     public int nextRound(){
         int round=startRoundIndex++;
         return round%4;
+    }
+    public void calcScores(){
+        for (Player p:players ) {
+            p.scoreCalc();
+        }
     }
     public boolean canPlay(String c1){
 
@@ -82,9 +96,13 @@ public class Game {
 
        if(Objects.equals(getCardRank(topCard), "2")){
 
-           if (cards.length==1&&!drew2) {
+           if (cards.length!=plus2Count*2&&!drew2) {
                return false;
            }else if(cards.length!=1&&drew2){
+               return false;
+           }
+           HashSet<String> temp=new HashSet<>(List.of(cards));
+           if(temp.size()!=cards.length){
                return false;
            }
            for(int i=0;i<cards.length;i++){
@@ -109,6 +127,10 @@ public class Game {
         String[] card= c.split(",");
         players.get(p).cards.removeAll(List.of(card));
     }
+    public void addToPlayerHand(int p,String c){
+        String[] card= c.split(",");
+        players.get(p).cards.addAll(List.of(card));
+    }
     public boolean canDraw(){
         return getDeckSize()>0;
     }
@@ -130,10 +152,14 @@ public class Game {
         return drew;
     }
     public String getCardSuit(String c){
-        return c.substring(1);
+        return c.substring(c.length()-1);
     }
     public String getCardRank(String c){
-        return String.valueOf(c.charAt(0));
+        if(c.length()==2) {
+            return String.valueOf(c.charAt(0));
+        }else{
+            return "10";
+        }
     }
     public String playCard(String c){
         String[] cards= c.split(",");
@@ -146,10 +172,25 @@ public class Game {
         if(Objects.equals(getCardRank(topCard), "1")) {
             direction=direction*-1;
         } else if (Objects.equals(getCardRank(topCard), "Q")) {
+            skippedIndex();
             nextTurn();
         }
         }
         return topCard;
+    }
+    public void skippedIndex(){
+        int skipped=currentTurn;
+        if(direction>0){
+            skipped++;
+        }else{
+            skipped--;
+        }
+        if(skipped>3){
+            skipped=0;
+        } else if (skipped<0) {
+            skipped=3;
+        }
+        skippedIndex=skipped;
     }
     public int getDeckSize(){
         return deck.size();
@@ -157,6 +198,17 @@ public class Game {
     public boolean cardsExist(int p,String c){
         String[] cards= c.split(",");
         return (players.get(p).cards.containsAll(List.of(cards)));
+    }
+    public void newRound(){
+        deckInitializer();
+        direction=1;
+        skippedIndex=-1;
+        for (Player p: players) {
+            p.cards=dealHand();
+            p.canPlay=true;
+            p.skipped=false;
+            p.drew="";
+        }
     }
     public boolean canPlayerPlay(int p){
         if(deck.size()>1){

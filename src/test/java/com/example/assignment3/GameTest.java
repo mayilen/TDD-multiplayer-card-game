@@ -64,8 +64,6 @@ public class GameTest {
         game.topCard="2S";
         assertEquals(2,game.incrementPlus2("2S"));
         assertEquals(1,game.incrementPlus2("JS"));
-
-
     }
 
     @Test
@@ -103,6 +101,8 @@ public class GameTest {
     public void getCardRank(){
         game=new Game();
         assertEquals("7",game.getCardRank("7S"));
+        assertEquals("10",game.getCardRank("10S"));
+
     }
     @Test
     public void dealCards(){
@@ -128,7 +128,19 @@ public class GameTest {
         game.playCard("2D");
         assertFalse(game.drew2);
         assertFalse(game.canPlay("2S"));
+        assertFalse(game.canPlay("8S,1D"));
+       // game.playCard("1D");
+        assertEquals(1,game.currentTurn);
+        assertEquals(-1,game.direction);
+        assertEquals(0,game.nextTurn());
+        game.playCard("3D");
+        assertEquals(-1,game.direction);
+        assertEquals(3,game.nextTurn());
+        assertEquals(2,game.nextTurn());
+        assertEquals(1,game.nextTurn());
+        assertEquals(0,game.nextTurn());
     }
+
     @Test
     public void maxPlayer() {
         game = new Game();
@@ -149,6 +161,22 @@ public class GameTest {
         assertEquals(2,game.players.get(0).cards.size());
     }
     @Test
+    public void scoreCalc() {
+        game = new Game();
+        game.players.add(new Player(1));
+        game.players.get(0).setHand("3H");
+        game.calcScores();
+        assertEquals(3,game.players.get(0).score);
+    }
+    @Test
+    public void addToPlayerHand(){
+        game=new Game();
+        game.players.add(new Player(1));
+        game.players.get(0).setHand("3H,7D,9H");
+        game.addToPlayerHand(0,"9D");
+        assertEquals(4,game.players.get(0).cards.size());
+    }
+    @Test
     public void canDraw(){
         game=new Game();
         assertTrue(game.canDraw());
@@ -157,6 +185,21 @@ public class GameTest {
         assertTrue(game.canDraw());
         game.drawCard();
         assertFalse(game.canDraw());
+    }
+    @Test
+    public void testtwos(){
+        game=new Game();
+        game.topCard="3H";
+        game.playCard("2D");
+        assertEquals(1,game.plus2Count);
+        assertFalse(game.drew2);
+        game.playCard("2S,4S");
+        assertEquals(1,game.plus2Count);
+        game.playCard("2S");
+        game.drew2=true;
+        game.playCard("2S");
+        assertEquals(2,game.plus2Count);
+        assertEquals(4,game.drawtwo().size());
     }
     @Test
     public void canPlayTest(){
@@ -168,6 +211,8 @@ public class GameTest {
         game.topCard="2D";
         assertFalse(game.canPlay("2S"));
         assertTrue(game.canPlay("7D,3D"));
+        assertFalse(game.canPlay("7D,3D,9D"));
+        assertFalse(game.canPlay("7D,7D"));
         game.drew2=true;
         assertTrue(game.canPlay("7D"));
         assertFalse(game.canPlay("2D,7D"));
@@ -184,7 +229,54 @@ public class GameTest {
        assertEquals(3,game.nextTurn());
        assertEquals(0,game.nextTurn());
        assertEquals(1,game.nextTurn());
+       assertEquals(2,game.nextTurn());
+       assertEquals(3,game.nextTurn());
+
    }
+    @Test
+    public void skippedIndex(){
+        Game game=new Game();
+        game.topCard="QC";
+        game.playCard("QD");
+        assertEquals(1,game.skippedIndex);
+        assertEquals(2,game.nextTurn());
+    }
+    @Test
+    public void newRound(){
+        Game game=new Game();
+        game.players.add(new Player(1));
+        game.players.get(0).canPlay=false;
+        game.newRound();
+        assertTrue(game.players.get(0).canPlay);
+    }
+    @Test
+    public void isGameDone(){
+        Game game=new Game();
+        game.players.add(new Player(1));
+        game.players.add(new Player(2));
+        game.topCard="9H";
+        game.players.get(0).setHand("3C");
+        game.players.get(1).setHand("4H");
+        game.players.get(0).canPlay=game.canPlayerPlay(0);
+        game.players.get(1).canPlay=game.canPlayerPlay(1);
+        assertTrue(game.players.get(0).canPlay);
+        assertTrue(game.players.get(1).canPlay);
+        assertFalse(game.isGameDone());
+        game.deck.clear();
+        game.players.get(0).canPlay=game.canPlayerPlay(0);
+        game.players.get(1).canPlay=game.canPlayerPlay(1);
+
+        assertFalse(game.players.get(0).canPlay);
+        assertTrue(game.players.get(1).canPlay);
+        assertFalse(game.isGameDone());
+        game.players.get(1).setHand("4D");
+        game.players.get(0).canPlay=game.canPlayerPlay(0);
+        game.players.get(1).canPlay=game.canPlayerPlay(1);
+        assertFalse(game.players.get(0).canPlay);
+        assertFalse(game.players.get(1).canPlay);
+        assertTrue(game.isGameDone());
+    }
+
     @Test
     public void nextRound(){
         Game game=new Game();

@@ -12,5 +12,9 @@ public class Greeting {
     public String error;
     public String card;
     public String playerTurn;
+    public String drew;
 
+    public boolean skipped;
+    public boolean suite;
+    public String cardToPlay;
 }

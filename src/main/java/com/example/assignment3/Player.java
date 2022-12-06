@@ -7,8 +7,11 @@ import java.util.Objects;
 public class Player {
     public int playerID;
     public int score=0;
+    public boolean canPlay=true;
+    public boolean skipped=false;
     Game game=new Game();
     public ArrayList<String> cards=new ArrayList<>();
+    public String drew="";
     public Player(int id){
         playerID=id;
 

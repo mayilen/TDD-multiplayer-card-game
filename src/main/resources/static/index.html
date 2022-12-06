@@ -28,10 +28,18 @@
     </div>
     <div id="conversation" hidden="true">
 
+        <div class="row" id="winner" style="font-weight: 900">
 
+        </div>
     <div class="row" id="turn" style="font-weight: 900">
 
     </div>
+        <div class="row" id="direction" style="font-weight: 900">
+
+        </div>
+        <div class="row" id="skipped" style="font-weight: 900">
+
+        </div>
     <div class="row" style="display: inline-block;">
         <div class="col-sm-12" style="display: inline-block; white-space: nowrap">
             <div class="col-md-auto" id="playerText" style="display: inline-block;">
@@ -80,6 +88,14 @@
 
             </div>
         </div>
+        <div class="row">
+            <div class="col-md-12">
+                Drawn Cards:
+            </div>
+            <div class="col-md-12" id="drew">
+
+            </div>
+        </div>
         <div class="row" id="play" hidden="true">
             <div class="col-md-12">
                 <form class="form-inline">
@@ -100,7 +116,28 @@
 
                 </form>
             </div>
+
         </div>
+        <div class="row" id="changesuite" hidden="true">
+            <div class="col-md-12">
+                <form class="form-inline">
+                    <div class="form-group">
+                        <label for="suite" id="suiteLabel2" >Select a suite:</label>
+                        <select name="suite" id="suite2">
+                            <option value="S">Spades</option>
+                            <option value="C">Clubs</option>
+                            <option value="D">Diamonds</option>
+                            <option value="H">Hearts</option>
+                        </select>
+                        <button id="change" class="btn btn-default" type="submit">ChangeSuit</button>
+
+                    </div>
+
+                </form>
+            </div>
+
+        </div>
+
         <div class="row">
             <table style="width:30%">
                 <tr>
