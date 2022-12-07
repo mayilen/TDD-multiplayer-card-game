@@ -447,4 +447,35 @@ public class ConnectionBasicsTest extends AbstractSeleniumTest {
         p3.quit();
         p4.quit();
     }
+    @Test
+    public void TestRow61() throws Exception {
+        //this.indexPage.connect();
+        GameController.game.restart();
+        GameController.game.players.clear();
+        final WebDriver p1 = this.quickConnectSecondUser();
+        final WebDriver p2 = this.quickConnectSecondUser();
+        final WebDriver p3 = this.quickConnectSecondUser();
+        final WebDriver p4 = this.quickConnectSecondUser();
+
+        this.waitForDisplayed(p1.findElement(By.id("play")));
+        GameController.game.topCard = "7C";
+        GameController.game.players.get(0).setHand("3H");
+        GameController.game.deck.clear();
+        GameController.game.deck.add("7D");
+        GameController.game.deck.add("4H");
+        GameController.game.deck.add("5S");
+        GameController.game.deck.add("6D");
+        p1.findElement(By.id("refresh")).click();
+        assertEquals("7C",p1.findElement(By.id("topCard")).getText());
+        assertEquals("[3H]",p1.findElement(By.id("hand")).getText());
+        p1.findElement(By.id("draw")).click();
+        assertEquals("[3H, 6D, 5S, 4H]",p1.findElement(By.id("hand")).getText());
+        assertEquals("7C",p1.findElement(By.id("topCard")).getText());
+        assertEquals("6D, 5S, 4H & can't play",p1.findElement(By.id("drew")).getText());
+        p1.quit();
+        p2.quit();
+        p3.quit();
+        p4.quit();
+    }
+    
 }
