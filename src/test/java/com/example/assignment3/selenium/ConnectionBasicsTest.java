@@ -6,6 +6,7 @@ import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.Select;
 import org.springframework.stereotype.Controller;
 
 import java.util.List;
@@ -477,5 +478,38 @@ public class ConnectionBasicsTest extends AbstractSeleniumTest {
         p3.quit();
         p4.quit();
     }
-    
+    @Test
+    public void TestRow62() throws Exception {
+        //this.indexPage.connect();
+        GameController.game.restart();
+        GameController.game.players.clear();
+        final WebDriver p1 = this.quickConnectSecondUser();
+        final WebDriver p2 = this.quickConnectSecondUser();
+        final WebDriver p3 = this.quickConnectSecondUser();
+        final WebDriver p4 = this.quickConnectSecondUser();
+
+        this.waitForDisplayed(p1.findElement(By.id("play")));
+        GameController.game.topCard = "7C";
+        GameController.game.players.get(0).setHand("3H");
+        GameController.game.deck.clear();
+        GameController.game.deck.add("7D");
+        GameController.game.deck.add("8H");
+        GameController.game.deck.add("6D");
+        p1.findElement(By.id("refresh")).click();
+        assertEquals("7C",p1.findElement(By.id("topCard")).getText());
+        assertEquals("[3H]",p1.findElement(By.id("hand")).getText());
+        p1.findElement(By.id("draw")).click();
+        assertTrue(p1.findElement(By.id("changesuite")).isDisplayed());
+        Select dropdown = new Select(p1.findElement(By.id("suite2")));
+        dropdown.selectByValue("D");
+        p1.findElement(By.id("change")).click();
+        assertEquals("8D",p1.findElement(By.id("topCard")).getText());
+        assertEquals("[3H, 6D]",p1.findElement(By.id("hand")).getText());
+        assertEquals("6D, 8H & played 8H",p1.findElement(By.id("drew")).getText());
+        p1.quit();
+        p2.quit();
+        p3.quit();
+        p4.quit();
+    }
+
 }
