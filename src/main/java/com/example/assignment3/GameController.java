@@ -88,12 +88,12 @@ public class GameController {
             if (Objects.equals(game.getCardRank(game.topCard), "2")) {
                 ArrayList<String> drew = game.drawtwo();
                 String card = drew.stream().map(Object::toString)
-                        .collect(Collectors.joining(","));
+                        .collect(Collectors.joining(", "));
                 game.players.get(game.currentTurn).drew = card;
                 game.addToPlayerHand(game.currentTurn, card);
                 for (String s : drew) {
                     if (game.canPlay(s)) {
-
+                        game.players.get(game.currentTurn).drew += " & played " + s;
                         HelloMessage m = new HelloMessage();
                         m.card = s;
                         if(Objects.equals(game.getCardRank(s), "8")){
