@@ -56,7 +56,7 @@ public class GameController {
                 System.out.println("Diretion " + game.direction);
                 if (game.players.get(playerIndex).hasWon()) {
                     game.calcScores();
-                    simpMessagingTemplate.convertAndSend("/topic/winner", new Message("Player" + (playerIndex + 1 )+ " has Won!"));
+                   // simpMessagingTemplate.convertAndSend("/topic/winner", new Message("Player" + (playerIndex + 1 )+ " has Won!"));
                     sendScores();
                     newRound();
                 }
@@ -203,7 +203,7 @@ public class GameController {
     @MessageMapping("/hello")
     @SendTo("/topic/greetings")
     public int greet(HelloMessage m) throws Exception {
-        Thread.sleep(500);
+       // Thread.sleep(500);
 
         game.players.add(new Player(m.getId()));
 
