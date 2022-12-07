@@ -98,6 +98,7 @@ public class GameController {
                         m.card = s;
                         if(Objects.equals(game.getCardRank(s), "8")){
                             g.suite=true;
+                            g.card = game.players.get(game.currentTurn).cards.toString();
                             g.cardToPlay=s;
                             g.drew=game.players.get(game.currentTurn).drew;
                             sendSpecific(game.players.get(game.currentTurn).getPlayerID(), g);
@@ -125,6 +126,7 @@ public class GameController {
                         if(Objects.equals(game.getCardRank(card), "8")){
                             g.suite=true;
                             g.cardToPlay=card;
+                            g.card = game.players.get(game.currentTurn).cards.toString();
                             g.drew=game.players.get(game.currentTurn).drew;
                             sendSpecific(game.players.get(game.currentTurn).getPlayerID(), g);
                         }else{
