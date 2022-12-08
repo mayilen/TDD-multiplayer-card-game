@@ -161,6 +161,23 @@ public class Game {
             return "10";
         }
     }
+    public String winnerIs(){
+        int index=0;
+        String s=null;
+        for (int i=0;i<players.size();i++ ) {
+            if(players.get(i).score>=100){
+                int smallest = players.get(i).score;
+                for (int j=0;j<players.size();j++ ) {
+                     if (players.get(j).score < smallest) {
+                     smallest = players.get(j).score;
+                         index=j;
+                     }
+                }
+               s= "Player "+(index+1)+" has Won!";
+            }
+        }
+        return s;
+    }
     public String playCard(String c){
         String[] cards= c.split(",");
         for(int i=0;i<cards.length;i++){
