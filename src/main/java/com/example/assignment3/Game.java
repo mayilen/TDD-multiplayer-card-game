@@ -81,8 +81,15 @@ public class Game {
         return true;
     }
     public int nextRound(){
-        int round=startRoundIndex++;
-        return round%4;
+        startRoundIndex++;
+
+        if(startRoundIndex>3){
+            startRoundIndex=0;
+        } else if (startRoundIndex<0) {
+            startRoundIndex=3;
+        }
+        currentTurn=startRoundIndex;
+        return startRoundIndex;
     }
     public void calcScores(){
         for (Player p:players ) {
