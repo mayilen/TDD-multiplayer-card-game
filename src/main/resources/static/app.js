@@ -94,8 +94,11 @@ function showGreeting(message) {
 
 }
 function winner({message}){
+    if(message!=null){
+        $("#winner").html(message)
 
- alert(message);
+    }
+
 }
 function direction({message}){
 

@@ -57,9 +57,13 @@ public class GameController {
                 System.out.println("Diretion " + game.direction);
                 if (game.players.get(playerIndex).hasWon()) {
                     game.calcScores();
-                   // simpMessagingTemplate.convertAndSend("/topic/winner", new Message("Player" + (playerIndex + 1 )+ " has Won!"));
+                    String win=game.winnerIs();
+
+                    simpMessagingTemplate.convertAndSend("/topic/winner", new Message(win));
                     sendScores();
+                    if(win==null){
                     newRound();
+                    }
                 }
                 System.out.println("new top card is: " + game.topCard);
 
@@ -156,9 +160,14 @@ public class GameController {
         String direction;
         if (game.isGameDone()) {
             game.calcScores();
-            simpMessagingTemplate.convertAndSend("/topic/winner", new Message("Game Ended"));
+
+            String win=game.winnerIs();
+
+            simpMessagingTemplate.convertAndSend("/topic/winner", new Message(win));
             sendScores();
-            newRound();
+            if(win==null){
+                newRound();
+            }
             return;
         }
         if (!game.canPlayerPlay(p)) {
