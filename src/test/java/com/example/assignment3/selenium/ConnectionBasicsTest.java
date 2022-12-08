@@ -1198,4 +1198,73 @@ public class ConnectionBasicsTest extends AbstractSeleniumTest {
         p3.quit();
         p4.quit();
     }
+    @Test
+    public void TestRow77() throws Exception {
+        GameController.game.restart();
+        GameController.game.players.clear();
+        final WebDriver p1 = this.quickConnectSecondUser();
+        final WebDriver p2 = this.quickConnectSecondUser();
+        final WebDriver p3 = this.quickConnectSecondUser();
+        final WebDriver p4 = this.quickConnectSecondUser();
+
+        this.waitForDisplayed(p1.findElement(By.id("play")));
+        GameController.game.topCard = "3D";
+        GameController.game.players.get(0).setHand("1S,3S,6H,JD,4D");
+        GameController.game.players.get(1).setHand("4C,QS,QH,QD,5D");
+        GameController.game.players.get(2).setHand("8H,JH,6H,KH,KS");
+        GameController.game.players.get(3).setHand("8C,QC,2D,8D,7D");
+
+        GameController.game.deck.clear();
+
+        GameController.game.deck.add("7D");
+        GameController.game.deck.add("7C");
+        GameController.game.deck.add("6H");
+        GameController.game.deck.add("6D");
+        GameController.game.deck.add("3H");
+        GameController.game.deck.add("6D");
+        GameController.game.deck.add("3D");
+        p1.findElement(By.id("refresh")).click();
+        assertEquals("3D",p1.findElement(By.id("topCard")).getText());
+        assertEquals("[1S, 3S, 6H, JD, 4D]",p1.findElement(By.id("hand")).getText());
+        assertEquals("[4C, QS, QH, QD, 5D]",p2.findElement(By.id("hand")).getText());
+        assertEquals("[8H, JH, 6H, KH, KS]",p3.findElement(By.id("hand")).getText());
+        assertEquals("[8C, QC, 2D, 8D, 7D]",p4.findElement(By.id("hand")).getText());
+        p1.findElement(By.id("card")).sendKeys("4D");
+        p1.findElement(By.id("send")).click();
+        p2.findElement(By.id("card")).sendKeys("5D");
+        p2.findElement(By.id("send")).click();
+        p3.findElement(By.id("draw")).click();
+        p4.findElement(By.id("card")).sendKeys("7D");
+        p4.findElement(By.id("send")).click();
+        p1.findElement(By.id("card")).sendKeys("JD");
+        p1.findElement(By.id("send")).click();
+        p2.findElement(By.id("card")).sendKeys("QD");
+        p2.findElement(By.id("send")).click();
+        p4.findElement(By.id("draw")).click();
+        p1.findElement(By.id("card")).sendKeys("6H");
+        p1.findElement(By.id("send")).click();
+        p2.findElement(By.id("card")).sendKeys("QH");
+        p2.findElement(By.id("send")).click();
+        p4.findElement(By.id("draw")).click();
+        p1.findElement(By.id("card")).sendKeys("3S");
+        p1.findElement(By.id("send")).click();
+        p2.findElement(By.id("card")).sendKeys("QS");
+        p2.findElement(By.id("send")).click();
+        p4.findElement(By.id("card")).sendKeys("QC");
+        p4.findElement(By.id("send")).click();
+        p2.findElement(By.id("card")).sendKeys("4C");
+        p2.findElement(By.id("send")).click();
+        assertEquals( "Player 2 has Won!",p2.findElement(By.id("winner")).getText());
+        assertEquals("[1S]",p1.findElement(By.id("hand")).getText());
+        assertEquals("[8H, JH, 6H, KH, KS]",p3.findElement(By.id("hand")).getText());
+        assertEquals("[8C, 2D, 8D]",p4.findElement(By.id("hand")).getText());
+        assertEquals("1",p2.findElement(By.id("score1")).getText());
+        assertEquals("0",p2.findElement(By.id("score2")).getText());
+        assertEquals("86",p2.findElement(By.id("score3")).getText());
+        assertEquals("102",p2.findElement(By.id("score4")).getText());
+        p1.quit();
+        p2.quit();
+        p3.quit();
+        p4.quit();
+    }
 }
