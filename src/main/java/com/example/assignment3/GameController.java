@@ -60,10 +60,14 @@ public class GameController {
                     String win=game.winnerIs();
 
                     simpMessagingTemplate.convertAndSend("/topic/winner", new Message(win));
+
                     sendScores();
                     if(win==null){
                     newRound();
+                    }else{
+                        playerTurn(5);
                     }
+                    return;
                 }
                 System.out.println("new top card is: " + game.topCard);
 
@@ -96,17 +100,17 @@ public class GameController {
                         .collect(Collectors.joining(","));
                 game.players.get(game.currentTurn).drew = card;
                 game.addToPlayerHand(game.currentTurn, card);
-
-                for (String s : drew) {
-                    if (game.canPlay(s)) {
-                        System.out.println(s);
-                        game.players.get(game.currentTurn).drew += " & played " + s;
+                for(int i= drew.size()-1;i>=0;i--){
+               // for (String s : drew) {
+                    if (game.canPlay(drew.get(i))) {
+                        System.out.println(drew.get(i));
+                        game.players.get(game.currentTurn).drew += " & played " + drew.get(i);
                         HelloMessage m = new HelloMessage();
-                        m.card = s;
-                        if(Objects.equals(game.getCardRank(s), "8")){
+                        m.card = drew.get(i);
+                        if(Objects.equals(game.getCardRank(drew.get(i)), "8")){
                             g.suite=true;
                             g.card = game.players.get(game.currentTurn).cards.toString();
-                            g.cardToPlay=s;
+                            g.cardToPlay=drew.get(i);
                             g.drew=game.players.get(game.currentTurn).drew;
                             sendSpecific(game.players.get(game.currentTurn).getPlayerID(), g);
                         }else{
@@ -149,15 +153,25 @@ public class GameController {
     }
 
     public  void newRound() throws Exception {
-        game.newRound();
+        game.deckInitializer();
+        game.players.get(0).canPlay=true;
+        game.players.get(1).canPlay=true;
+        game.players.get(2).canPlay=true;
+        game.players.get(3).canPlay=true;
+        game.players.get(0).cards = game.dealHand();
+        game.players.get(1).cards = game.dealHand();
+        game.players.get(2).cards = game.dealHand();
+        game.players.get(3).cards = game.dealHand();
+        game.intializeTopCard();
         playerTurn(game.nextRound());
         simpMessagingTemplate.convertAndSend("/topic/deck", new Message("" + game.getDeckSize()));
-        simpMessagingTemplate.convertAndSend("/topic/topcard", new Message(game.intializeTopCard()));
+        simpMessagingTemplate.convertAndSend("/topic/topcard", new Message(game.topCard));
 
     }
 
     public  void  playerTurn(int p) throws Exception {
         String direction;
+        if(p!=5){
         if (game.isGameDone()) {
             game.calcScores();
 
@@ -167,7 +181,9 @@ public class GameController {
             sendScores();
             if(win==null){
                 newRound();
-            }
+            }else{
+            playerTurn(5);
+        }
             return;
         }
         if (!game.canPlayerPlay(p)) {
@@ -184,8 +200,17 @@ public class GameController {
         System.out.println("p is: " + p);
         if (game.skippedIndex != -1) {
             game.players.get(game.skippedIndex).skipped = true;
-        }
+        }}
         for (int i = 0; i < game.players.size(); i++) {
+            if (p==5){
+                Greeting g = new Greeting();
+                g.player = i + 1;
+                g.card = game.players.get(i).cards.toString();
+                g.drew = game.players.get(i).drew;
+                g.skipped = game.players.get(i).skipped;
+                g.playerTurn = "";
+                sendSpecific(game.players.get(i).getPlayerID(), g);
+            }else{
             if (i != p) {
                 Greeting g = new Greeting();
                 g.player = i + 1;
@@ -209,6 +234,7 @@ public class GameController {
                 game.players.get(i).skipped = false;
                 game.skippedIndex = -1;
             }
+            }
         }
     }
 
@@ -230,7 +256,7 @@ public class GameController {
             playerTurn(game.currentTurn);
             simpMessagingTemplate.convertAndSend("/topic/deck", new Message("" + game.getDeckSize()));
             sendScores();
-            game.nextRound();
+
             simpMessagingTemplate.convertAndSend("/topic/topcard", new Message(game.intializeTopCard()));
         }
         return game.players.size();
