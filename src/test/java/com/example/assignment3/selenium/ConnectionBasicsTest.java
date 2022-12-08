@@ -1069,4 +1069,133 @@ public class ConnectionBasicsTest extends AbstractSeleniumTest {
         p3.quit();
         p4.quit();
     }
+    @Test
+    public void TestRow72() throws Exception {
+        GameController.game.restart();
+        GameController.game.players.clear();
+        final WebDriver p1 = this.quickConnectSecondUser();
+        final WebDriver p2 = this.quickConnectSecondUser();
+        final WebDriver p3 = this.quickConnectSecondUser();
+        final WebDriver p4 = this.quickConnectSecondUser();
+
+        this.waitForDisplayed(p1.findElement(By.id("play")));
+        GameController.game.topCard = "6C";
+        GameController.game.players.get(0).setHand("2C,5C,2C,JD,7C");
+        GameController.game.players.get(1).setHand("4C,6C,9D,KD,9C");
+        GameController.game.players.get(2).setHand("7D,3C,9S,5D,KC");
+        GameController.game.players.get(3).setHand("5H,4C,QS,5C,JC");
+
+        GameController.game.deck.clear();
+
+        GameController.game.deck.add("7D");
+        GameController.game.deck.add("7C");
+        GameController.game.deck.add("6H");
+        GameController.game.deck.add("6D");
+        GameController.game.deck.add("5S");
+        GameController.game.deck.add("9D");
+        GameController.game.deck.add("2H");
+        p1.findElement(By.id("refresh")).click();
+        assertEquals("6C",p1.findElement(By.id("topCard")).getText());
+        assertEquals("[2C, 5C, 2C, JD, 7C]",p1.findElement(By.id("hand")).getText());
+        assertEquals("[4C, 6C, 9D, KD, 9C]",p2.findElement(By.id("hand")).getText());
+        assertEquals("[7D, 3C, 9S, 5D, KC]",p3.findElement(By.id("hand")).getText());
+        assertEquals("[5H, 4C, QS, 5C, JC]",p4.findElement(By.id("hand")).getText());
+        p1.findElement(By.id("card")).sendKeys("7C");
+        p1.findElement(By.id("send")).click();
+        p2.findElement(By.id("card")).sendKeys("9C");
+        p2.findElement(By.id("send")).click();
+        p3.findElement(By.id("card")).sendKeys("KC");
+        p3.findElement(By.id("send")).click();
+        p4.findElement(By.id("card")).sendKeys("JC");
+        p4.findElement(By.id("send")).click();
+        p1.findElement(By.id("card")).sendKeys("JD");
+        p1.findElement(By.id("send")).click();
+        p2.findElement(By.id("card")).sendKeys("KD");
+        p2.findElement(By.id("send")).click();
+        p3.findElement(By.id("card")).sendKeys("5D");
+        p3.findElement(By.id("send")).click();
+        p4.findElement(By.id("card")).sendKeys("5C");
+        p4.findElement(By.id("send")).click();
+        p1.findElement(By.id("card")).sendKeys("2C");
+        p1.findElement(By.id("send")).click();
+        assertEquals("2C",p2.findElement(By.id("topCard")).getText());
+        assertEquals("[4C, 6C, 9D]",p2.findElement(By.id("hand")).getText());
+        p2.findElement(By.id("card")).sendKeys("4C,6C");
+        p2.findElement(By.id("send")).click();
+        assertEquals("[9D]",p2.findElement(By.id("hand")).getText());
+        assertEquals("Player 3's Turn", p1.findElement(By.id("turn")).getText());
+
+        assertEquals("Your Turn", p3.findElement(By.id("turn")).getText());
+        p1.quit();
+        p2.quit();
+        p3.quit();
+        p4.quit();
+    }
+    @Test
+    public void TestRow73() throws Exception {
+        GameController.game.restart();
+        GameController.game.players.clear();
+        final WebDriver p1 = this.quickConnectSecondUser();
+        final WebDriver p2 = this.quickConnectSecondUser();
+        final WebDriver p3 = this.quickConnectSecondUser();
+        final WebDriver p4 = this.quickConnectSecondUser();
+
+        this.waitForDisplayed(p1.findElement(By.id("play")));
+        GameController.game.topCard = "6C";
+        GameController.game.players.get(0).setHand("2H,2C,10C,JD,7C");
+        GameController.game.players.get(1).setHand("4C,6C,9C,KD,3C");
+        GameController.game.players.get(2).setHand("7D,3C,JC,5D,KC");
+        GameController.game.players.get(3).setHand("5H,4C,7C,5C,JC");
+
+        GameController.game.deck.clear();
+
+        GameController.game.deck.add("7D");
+        GameController.game.deck.add("7C");
+        GameController.game.deck.add("6H");
+        GameController.game.deck.add("6D");
+        GameController.game.deck.add("5S");
+        GameController.game.deck.add("9D");
+        GameController.game.deck.add("2H");
+        p1.findElement(By.id("refresh")).click();
+        assertEquals("6C",p1.findElement(By.id("topCard")).getText());
+        assertEquals("[2H, 2C, 10C, JD, 7C]",p1.findElement(By.id("hand")).getText());
+        assertEquals("[4C, 6C, 9C, KD, 3C]",p2.findElement(By.id("hand")).getText());
+        assertEquals("[7D, 3C, JC, 5D, KC]",p3.findElement(By.id("hand")).getText());
+        assertEquals("[5H, 4C, 7C, 5C, JC]",p4.findElement(By.id("hand")).getText());
+        p1.findElement(By.id("card")).sendKeys("7C");
+        p1.findElement(By.id("send")).click();
+        p2.findElement(By.id("card")).sendKeys("3C");
+        p2.findElement(By.id("send")).click();
+        p3.findElement(By.id("card")).sendKeys("KC");
+        p3.findElement(By.id("send")).click();
+        p4.findElement(By.id("card")).sendKeys("JC");
+        p4.findElement(By.id("send")).click();
+        p1.findElement(By.id("card")).sendKeys("JD");
+        p1.findElement(By.id("send")).click();
+        p2.findElement(By.id("card")).sendKeys("KD");
+        p2.findElement(By.id("send")).click();
+        p3.findElement(By.id("card")).sendKeys("5D");
+        p3.findElement(By.id("send")).click();
+        p4.findElement(By.id("card")).sendKeys("5C");
+        p4.findElement(By.id("send")).click();
+        p1.findElement(By.id("card")).sendKeys("10C");
+        p1.findElement(By.id("send")).click();
+        p2.findElement(By.id("card")).sendKeys("9C");
+        p2.findElement(By.id("send")).click();
+        p3.findElement(By.id("card")).sendKeys("JC");
+        p3.findElement(By.id("send")).click();
+        p4.findElement(By.id("card")).sendKeys("7C");
+        p4.findElement(By.id("send")).click();
+        p1.findElement(By.id("card")).sendKeys("2C");
+        p1.findElement(By.id("send")).click();
+        assertEquals("2C",p2.findElement(By.id("topCard")).getText());
+        assertEquals("[4C, 6C]",p2.findElement(By.id("hand")).getText());
+        p2.findElement(By.id("card")).sendKeys("4C,6C");
+        p2.findElement(By.id("send")).click();
+        assertEquals("2",p1.findElement(By.id("score1")).getText());
+        p1.quit();
+        p2.quit();
+        p3.quit();
+        p4.quit();
+    }
 }
