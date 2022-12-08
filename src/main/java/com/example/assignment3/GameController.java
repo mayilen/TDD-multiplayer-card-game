@@ -45,6 +45,7 @@ public class GameController {
         System.out.println("top card is: " + game.topCard);
         Greeting g = new Greeting();
         int playerIndex = game.currentTurn;
+        System.out.println(game.players.get(game.currentTurn).cards.toString());
         if (game.cardsExist(playerIndex, m.getCard())) {
             if (game.canPlay(m.getCard())) {
                 game.playCard(m.getCard());
@@ -88,11 +89,13 @@ public class GameController {
             if (Objects.equals(game.getCardRank(game.topCard), "2")) {
                 ArrayList<String> drew = game.drawtwo();
                 String card = drew.stream().map(Object::toString)
-                        .collect(Collectors.joining(", "));
+                        .collect(Collectors.joining(","));
                 game.players.get(game.currentTurn).drew = card;
                 game.addToPlayerHand(game.currentTurn, card);
+
                 for (String s : drew) {
                     if (game.canPlay(s)) {
+                        System.out.println(s);
                         game.players.get(game.currentTurn).drew += " & played " + s;
                         HelloMessage m = new HelloMessage();
                         m.card = s;
@@ -116,7 +119,7 @@ public class GameController {
                     if (game.players.get(game.currentTurn).drew.isBlank()) {
                         game.players.get(game.currentTurn).drew += card;
                     } else {
-                        game.players.get(game.currentTurn).drew += ", " + card;
+                        game.players.get(game.currentTurn).drew += "," + card;
                     }
                     game.addToPlayerHand(game.currentTurn, card);
                     if (game.canPlay(card)) {
