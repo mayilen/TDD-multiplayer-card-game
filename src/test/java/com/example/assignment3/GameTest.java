@@ -202,6 +202,17 @@ public class GameTest {
         assertEquals(4,game.drawtwo().size());
     }
     @Test
+    public void winnerIs(){
+        Game game=new Game();
+        game.players.add(new Player(1));
+        game.players.add(new Player(2));
+        game.players.get(0).score=100;
+        game.players.get(1).score=6;
+        assertEquals("Player 2 has Won!",game.winnerIs());
+        game.players.get(0).score=8;
+       assertNull(game.winnerIs());
+    }
+    @Test
     public void canPlayTest(){
         game=new Game();
         game.topCard="7H";
