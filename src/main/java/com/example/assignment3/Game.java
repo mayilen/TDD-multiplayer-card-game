@@ -43,6 +43,7 @@ public class Game {
         currentTurn=0;
         startRoundIndex=0;
        plus2Count=1;
+       direction=1;
         drew2=false;
         deckInitializer();
     }

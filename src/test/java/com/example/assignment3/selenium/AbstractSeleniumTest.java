@@ -4,6 +4,7 @@ package com.example.assignment3.selenium;
 import com.example.assignment3.config.MockUserFactory;
 import com.example.assignment3.selenium.page.IndexPage;
 import org.junit.Before;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -46,11 +47,15 @@ public abstract class AbstractSeleniumTest {
 
   @Before
   public void setUp() {
+      delay(2);
     webDriver.get("http://localhost:8080");
 //    indexPage = new IndexPage(webDriver);
     indexPage.refreshWithNewDriver(webDriver);
   }
-
+    @AfterEach
+    public void remove(){
+        webDriver.quit();
+    }
     /**
      * Wait the specified number of seconds (sleeps the test).
      *

@@ -3,6 +3,7 @@ package com.example.assignment3.selenium;
 import com.example.assignment3.Game;
 import com.example.assignment3.GameController;
 import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -25,6 +26,8 @@ import static org.junit.jupiter.api.Assertions.*;
 public class ConnectionBasicsTest extends AbstractSeleniumTest {
     public GameController controller;
 
+
+
     @Test
     public void canConnect() {
         //this.indexPage.connect();
@@ -44,6 +47,7 @@ public class ConnectionBasicsTest extends AbstractSeleniumTest {
     }
     @Test
     public void TestRow41() throws Exception {
+
         //this.indexPage.connect();
         GameController.game.restart();
         GameController.game.players.clear();
@@ -72,6 +76,7 @@ public class ConnectionBasicsTest extends AbstractSeleniumTest {
     }
     @Test
     public void TestRow42() throws Exception {
+
         //this.indexPage.connect();
         GameController.game.restart();
         GameController.game.players.clear();
@@ -106,6 +111,7 @@ public class ConnectionBasicsTest extends AbstractSeleniumTest {
     }
     @Test
     public void TestRow44() throws Exception {
+
         //this.indexPage.connect();
         GameController.game.restart();
         GameController.game.players.clear();
@@ -122,7 +128,8 @@ public class ConnectionBasicsTest extends AbstractSeleniumTest {
         p1.findElement(By.id("card")).sendKeys("QC");
         p1.findElement(By.id("send")).click();
         assertEquals("QC",p4.findElement(By.id("topCard")).getText());
-        assertEquals("Your Turn was skipped",p2.findElement(By.id("skipped")).getText());
+        this.waitForDisplayed(p3.findElement(By.id("play")));
+       assertEquals("Your Turn was skipped",p2.findElement(By.id("skipped")).getText());
         assertEquals("Player 3's Turn", p4.findElement(By.id("turn")).getText());
         assertTrue(p3.findElement(By.id("play")).isDisplayed());
 
@@ -135,6 +142,7 @@ public class ConnectionBasicsTest extends AbstractSeleniumTest {
 
     @Test
     public void TestRow45() throws Exception {
+
         //this.indexPage.connect();
         GameController.game.restart();
         GameController.game.players.clear();
@@ -177,6 +185,7 @@ public class ConnectionBasicsTest extends AbstractSeleniumTest {
 
     @Test
     public void TestRow46() throws Exception {
+
         //this.indexPage.connect();
         GameController.game.restart();
         GameController.game.players.clear();
@@ -221,9 +230,11 @@ public class ConnectionBasicsTest extends AbstractSeleniumTest {
         p2.quit();
         p3.quit();
         p4.quit();
+
     }
     @Test
     public void TestRow48() throws Exception {
+
         //this.indexPage.connect();
         GameController.game.restart();
         GameController.game.players.clear();
@@ -265,6 +276,7 @@ public class ConnectionBasicsTest extends AbstractSeleniumTest {
     }
     @Test
     public void TestRow51() throws Exception {
+
         //this.indexPage.connect();
         GameController.game.restart();
         GameController.game.players.clear();
@@ -316,6 +328,7 @@ public class ConnectionBasicsTest extends AbstractSeleniumTest {
     }
     @Test
     public void TestRow53() throws Exception {
+
         //this.indexPage.connect();
         GameController.game.restart();
         GameController.game.players.clear();
@@ -340,6 +353,7 @@ public class ConnectionBasicsTest extends AbstractSeleniumTest {
     }
     @Test
     public void TestRow54() throws Exception {
+
         //this.indexPage.connect();
         GameController.game.restart();
         GameController.game.players.clear();
@@ -364,6 +378,7 @@ public class ConnectionBasicsTest extends AbstractSeleniumTest {
     }
     @Test
     public void TestRow58() throws Exception {
+
         //this.indexPage.connect();
         GameController.game.restart();
         GameController.game.players.clear();
@@ -433,6 +448,7 @@ public class ConnectionBasicsTest extends AbstractSeleniumTest {
     }
     @Test
     public void TestRow59() throws Exception {
+
         //this.indexPage.connect();
         GameController.game.restart();
         GameController.game.players.clear();
@@ -444,7 +460,7 @@ public class ConnectionBasicsTest extends AbstractSeleniumTest {
         this.waitForDisplayed(p1.findElement(By.id("play")));
         GameController.game.topCard = "9H";
         GameController.game.players.get(0).setHand("3H,4D,JH,KC,10H");
-        GameController.game.players.get(1).setHand("5C,4C,KH,9C,10S");
+        GameController.game.players.get(1).setHand("8D,4C,KH,9C,10S");
         GameController.game.players.get(2).setHand("1S,3C,5H,JC,10D");
         GameController.game.players.get(3).setHand("3S,7C,5D,JD,10C");
 
@@ -504,6 +520,7 @@ public class ConnectionBasicsTest extends AbstractSeleniumTest {
     }
     @Test
     public void TestRow60() throws Exception {
+
         //this.indexPage.connect();
         GameController.game.restart();
         GameController.game.players.clear();
@@ -576,6 +593,7 @@ public class ConnectionBasicsTest extends AbstractSeleniumTest {
     }
     @Test
     public void TestRow61() throws Exception {
+
         //this.indexPage.connect();
         GameController.game.restart();
         GameController.game.players.clear();
@@ -647,6 +665,7 @@ public class ConnectionBasicsTest extends AbstractSeleniumTest {
     }
     @Test
     public void TestRow62() throws Exception {
+
         //this.indexPage.connect();
         GameController.game.restart();
         GameController.game.players.clear();
@@ -722,6 +741,7 @@ public class ConnectionBasicsTest extends AbstractSeleniumTest {
     }
     @Test
     public void TestRow63() throws Exception {
+
         GameController.game.restart();
         GameController.game.players.clear();
         final WebDriver p1 = this.quickConnectSecondUser();
@@ -784,6 +804,7 @@ public class ConnectionBasicsTest extends AbstractSeleniumTest {
     }
     @Test
     public void TestRow67() throws Exception {
+
         GameController.game.restart();
         GameController.game.players.clear();
         final WebDriver p1 = this.quickConnectSecondUser();
@@ -852,6 +873,7 @@ public class ConnectionBasicsTest extends AbstractSeleniumTest {
     }
     @Test
     public void TestRow68() throws Exception {
+
         GameController.game.restart();
         GameController.game.players.clear();
         final WebDriver p1 = this.quickConnectSecondUser();
@@ -921,6 +943,7 @@ public class ConnectionBasicsTest extends AbstractSeleniumTest {
     }
     @Test
     public void TestRow69() throws Exception {
+
         GameController.game.restart();
         GameController.game.players.clear();
         final WebDriver p1 = this.quickConnectSecondUser();
@@ -991,6 +1014,7 @@ public class ConnectionBasicsTest extends AbstractSeleniumTest {
     }
     @Test
     public void TestRow70() throws Exception {
+
         GameController.game.restart();
         GameController.game.players.clear();
         final WebDriver p1 = this.quickConnectSecondUser();
@@ -1071,6 +1095,7 @@ public class ConnectionBasicsTest extends AbstractSeleniumTest {
     }
     @Test
     public void TestRow72() throws Exception {
+
         GameController.game.restart();
         GameController.game.players.clear();
         final WebDriver p1 = this.quickConnectSecondUser();
@@ -1133,6 +1158,7 @@ public class ConnectionBasicsTest extends AbstractSeleniumTest {
     }
     @Test
     public void TestRow73() throws Exception {
+
         GameController.game.restart();
         GameController.game.players.clear();
         final WebDriver p1 = this.quickConnectSecondUser();
@@ -1200,6 +1226,7 @@ public class ConnectionBasicsTest extends AbstractSeleniumTest {
     }
     @Test
     public void TestRow77() throws Exception {
+
         GameController.game.restart();
         GameController.game.players.clear();
         final WebDriver p1 = this.quickConnectSecondUser();
@@ -1270,6 +1297,7 @@ public class ConnectionBasicsTest extends AbstractSeleniumTest {
     }
     @Test
     public void TestRow81() throws Exception {
+
         GameController.game.restart();
         GameController.game.players.clear();
         final WebDriver p1 = this.quickConnectSecondUser();
